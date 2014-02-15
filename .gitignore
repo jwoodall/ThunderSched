@@ -1,0 +1,57 @@
+# Ignore file for Visual Studio 2008
+
+# use glob syntax
+syntax: glob
+
+# Ignore Visual Studio 2008 files
+*.obj
+*.exe
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+*.lib
+*.sbr
+*.scc
+*.tmp
+[Bb]in
+[Dd]ebug*/
+obj/
+[Rr]elease*/
+_ReSharper*/
+[Tt]est[Rr]esult*
+[Bb]uild[Ll]og.*
+*.[Pp]ublish.xml
+Makefile
+Makefile.*
+Debug-log.html
+build/
+_UpgradeReport_Files
+Backupd+/
+Backup*/
+UpgradeLog*
+*.sdf
+*.opensdf
+Express/
+ManualExtractGuide.pdf
+*.old
+*Guide.pdf
+acorn/ui_acorn.h
+ui_sislib.h
+.~lock.*
+.DS_Store
+*.pyc
+current_release
+*.msi
+*.tli
