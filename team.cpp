@@ -11,9 +11,10 @@ team::team( const team& team1 )
 	_name = team1._name;
 }
 
-team::team(int race, QString name)
+team::team(int race, const char* name, const char* coach)
 	: _race(race)
 	, _name(name)
+    , _coach(coach)
 {
 }
 
@@ -29,6 +30,7 @@ team& team::operator=( const team& rhs )
 
 	return *this;
 }
+
 bool team::operator!=( const team& rhs )
 {
 	if (_race == rhs._race) return false;

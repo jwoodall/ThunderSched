@@ -34,12 +34,13 @@ class team
 {
 private:
 	QString _name;
-	int _race;
+    QString _coach;
+    int _race;
 
 public:
 	team();
 	team( const team& team1 );
-	team(int race, QString name);
+    team(int race, const char* name, const char* coach);
 	~team(void);
 
 	 team& operator=( const team& rhs );
