@@ -9,6 +9,8 @@ private:
 	int _num_games;
 	int _max_teams;
     QList<team*> _teams;
+    QList<game*> _games;
+
 
 public:
 	schedule(int num_games);
@@ -19,5 +21,7 @@ public:
     void shiftScheduleRight( QList<team*>* home );
     void shiftScheduleLeft( QList<team*>* home );
     void printSchedule( QString header, QList<game*> daySched );
+    bool validateSchedule();
+    int getGameCount(team* team1);
 };
 

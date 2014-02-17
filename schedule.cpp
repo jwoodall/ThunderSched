@@ -53,22 +53,33 @@ int schedule::generate(void)
     for (int day=1;day<=_num_games;day++){
         QList<game*>* dayList = new QList<game*>();
         generateGames(day, dayList, (*home), (*away));
-        QList<team*>* temp = (*home);
-        home = &(*away);
-        away = &temp;
-        if (day%2==0) shiftScheduleRight( *home );
-        else shiftScheduleLeft( *home );
+        if (day%2==0){
+            home = &list1;
+            away = &list2;
+            shiftScheduleRight( *home );
+        }
+        else{
+            home = &list2;
+            away = &list1;
+            shiftScheduleLeft( *home );
+        }
 
         printSchedule(QString("Game ")+QString::number(day), *dayList);
+    }
+    if (!validateSchedule()){
+        QTextStream out(stdout);
+        out << "Schedule is invalid." << endl;
+        return 1;
     }
     return 0;
 }
 
 void schedule::printSchedule( QString header, QList<game*> daySched )
 {
+    QTextStream out(stdout);
+    out << endl << endl;
+    out << header << endl;
     foreach(game* g1, daySched){
-        QTextStream out(stdout);
-        out << header << endl << endl;
         g1->print();
     }
 }
@@ -91,7 +102,36 @@ int schedule::generateGames(int day, QList<game*>* dayGames, const QList<team*>*
     for (int ii=0; ii<home->count(); ii++){
         game* newGame = new game(home->value(ii),away->value(ii),day);
         dayGames->append(newGame);
+        _games << newGame;
     }
-
     return 0;
+}
+bool schedule::validateSchedule()
+{
+    QTextStream out(stdout);
+    out << "Validating..." << endl;
+
+    out << "  Count teams" << endl;
+    foreach(team* tm, _teams){
+        int count = getGameCount(tm);
+        out << tm->name() << ": " << count << "total games" << endl;
+        if (count != _num_games) return false;
+    }
+    out << endl;
+    foreach(game* gm, _games){
+        if (!gm->_valid){
+            out << "A game is invalid: " << gm->dayString() << " with " << gm->home()->name() <<  endl;
+            return false;
+        }
+    }
+    return true;
+}
+int schedule::getGameCount(team* team1)
+{
+    int count = 0;
+    foreach(game* gm, _games){
+        if ((gm->away() == team1) ||
+                (gm->home() == team1)) count++;
+    }
+    return count;
 }

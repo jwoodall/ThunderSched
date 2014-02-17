@@ -7,6 +7,7 @@ game::game(team* home, team* away, int day)
 	, _away(away)
     , _day(day)
 {
+    validate();
 }
 
 
