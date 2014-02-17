@@ -1,5 +1,5 @@
+#include <QTextStream>
 #include "schedule.h"
-#include <QLinkedList>
 
 schedule::schedule(int num_games)
 	:_num_games(num_games)
@@ -28,8 +28,11 @@ int schedule::addTeam(team* team1)
 
 int schedule::generate(void)
 {
-    QLinkedList<team*> _home;
-    QLinkedList<team*> _away;
+    QList<team*>* list1 = new QList<team*>;
+    QList<team*>* list2 = new QList<team*>;
+
+    QList<team*>** home = &list1;
+    QList<team*>** away = &list2;
 
     int num_teams = _teams.count();
     if (num_teams % 2 == 1){
@@ -41,20 +44,54 @@ int schedule::generate(void)
     foreach(team* team1, _teams){
         count++;
         if(count<=num_teams/2){
-            _home << team1;
+            list1->append(team1);
         }else{
-            _away << team1;
+            list2->append(team1);
         }
     }
 
-    // Generate day 1
-    QList<game*> day1;
-    generateGames(day1, _home, _away);
+    for (int day=1;day<=_num_games;day++){
+        QList<game*>* dayList = new QList<game*>();
+        generateGames(day, dayList, (*home), (*away));
+        QList<team*>* temp = (*home);
+        home = &(*away);
+        away = &temp;
+        if (day%2==0) shiftScheduleRight( *home );
+        else shiftScheduleLeft( *home );
 
+        printSchedule(QString("Game ")+QString::number(day), *dayList);
+    }
     return 0;
 }
 
-int schedule::generateGames(const QList<game*>& day, const QLinkedList<team*>& home, QLinkedList<team*>& away )
+void schedule::printSchedule( QString header, QList<game*> daySched )
 {
+    foreach(game* g1, daySched){
+        QTextStream out(stdout);
+        out << header << endl << endl;
+        g1->print();
+    }
+}
+
+void schedule::shiftScheduleRight( QList<team*>* home )
+{
+    team* temp = home->takeLast();
+    home->insert(0,temp);
+}
+
+void schedule::shiftScheduleLeft( QList<team*>* home )
+{
+    team* temp = home->takeFirst();
+    home->append(temp);
+}
+
+int schedule::generateGames(int day, QList<game*>* dayGames, const QList<team*>* home, const QList<team*>* away )
+{
+    if (home->count() != away->count()) return 1;   // if they are different sizes something is wrong.
+    for (int ii=0; ii<home->count(); ii++){
+        game* newGame = new game(home->value(ii),away->value(ii),day);
+        dayGames->append(newGame);
+    }
+
     return 0;
 }

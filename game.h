@@ -10,5 +10,6 @@ private:
 public:
     game(team* home, team* away, int day);
 	~game(void);
+    void print();
 };
 

@@ -1,4 +1,5 @@
 #include <QString>
+#include <QStringList>
 
 #pragma once
 
@@ -29,7 +30,6 @@ enum myTeams {
 	, WoodElf
 };
 
-
 class team
 {
 private:
@@ -47,5 +47,10 @@ public:
 	 bool operator!=( const team& rhs );
 	 bool operator==( const team& rhs );
 
+     QString name() {return _name;};
+     QString coach() {return _coach;};
+     QString race() {return Races.value(_race);};
+
+     static QStringList Races;
 };
 

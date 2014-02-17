@@ -1,6 +1,8 @@
 #include "team.h"
 #include <QString>
 
+QStringList team::Races = QStringList()<< "Amazon"<<"Chaos"<<"ChaosDwarf"<<"ChaosPact"<<"DarkElf"<<"Dwarf"<<"Elf"<<"Goblin"<<"Halfling"<<"HighElf"<<"Human"<<"Khemri"<<"Lizardmen"<<"Necromantic"<<"Norse"<<"Nurgle"<<"Ogre"<<"Orc"<<"Skaven"<<"Slann"<<"Undead"<<"Underworld"<<"Vampire"<<"WoodElf";
+
 team::team()
 {
 }

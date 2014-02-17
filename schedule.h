@@ -15,6 +15,9 @@ public:
 	~schedule(void);
 	int generate();
     int addTeam(team* team1);
-    int generateGames(const QList<game*>& day, const QLinkedList<team*>& home, QLinkedList<team*>& away );
+    int generateGames(int day, QList<game*>* dayGames, const QList<team*>* home, const QList<team*>* away );
+    void shiftScheduleRight( QList<team*>* home );
+    void shiftScheduleLeft( QList<team*>* home );
+    void printSchedule( QString header, QList<game*> daySched );
 };
 
