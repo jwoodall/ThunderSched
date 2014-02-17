@@ -9,6 +9,8 @@
 int main(int argc, char *argv[])
 {
 	QCoreApplication a(argc, argv);
+    QTextStream out(stdout);
+    out << "ThunderSchedule version 0.1" << endl;
 
     schedule newSched(10);
     newSched.addTeam( new team(Skaven,"Death Runs Faster","Gollumullog") );

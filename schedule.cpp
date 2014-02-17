@@ -1,4 +1,5 @@
 #include <QTextStream>
+#include <QSet>
 #include "schedule.h"
 
 schedule::schedule(int num_games)
@@ -114,8 +115,9 @@ bool schedule::validateSchedule()
     out << "  Count teams" << endl;
     foreach(team* tm, _teams){
         int count = getGameCount(tm);
-        out << tm->name() << ": " << count << "total games" << endl;
+        out << tm->name() << ": " << count << " total games" << endl;
         if (count != _num_games) return false;
+        if (!verifyTeam(tm)) return false;
     }
     out << endl;
     foreach(game* gm, _games){
@@ -134,4 +136,19 @@ int schedule::getGameCount(team* team1)
                 (gm->home() == team1)) count++;
     }
     return count;
+}
+
+bool schedule::verifyTeam(team* team1)
+{
+    QList<team*> opponents;
+    foreach(game* gm, _games){
+        if (gm->away() == team1) opponents << gm->home();
+        if (gm->home() == team1) opponents << gm->away();
+    }
+    if (opponents.toSet().count() != opponents.count()){
+        QTextStream out(stdout);
+        out << team1->name() << " has duplicate opponents." << endl;
+        return false;
+    }
+    return true;
 }

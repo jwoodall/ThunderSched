@@ -23,5 +23,6 @@ public:
     void printSchedule( QString header, QList<game*> daySched );
     bool validateSchedule();
     int getGameCount(team* team1);
+    bool verifyTeam(team* team1);
 };
 
