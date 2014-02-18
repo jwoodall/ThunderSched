@@ -31,8 +31,8 @@ int main(int argc, char *argv[])
     newSched.addTeam( new team(ChaosDwarf,"40 Grinders","Blammaham (Steve)"));
     newSched.addTeam( new team(Human,"Harshmellow Darkstars ","Smallpox (James)" ));
     newSched.addTeam( new team(Dwarf,"Bad News Beards","Bear (Geoff)"));
-    newSched.addTeam( new team(Khemri,"Bonerattle ","Fidius (Bill)" ));
-    newSched.addTeam( new team(ChaosDwarf,"Hashuts Hellfires ","Wedge22 (Kristian)"));
+//    newSched.addTeam( new team(Khemri,"Bonerattle ","Fidius (Bill)" ));
+//    newSched.addTeam( new team(ChaosDwarf,"Hashuts Hellfires ","Wedge22 (Kristian)"));
 //    newSched.addTeam( new team(Human,"Chippendales ","Edwad (Ed)" ));
 //    newSched.addTeam( new team(Human,"Hogan's Heroes ","Redman (Tony)"));
 

@@ -48,7 +48,7 @@ int schedule::generate(void)
     }
     if (num_teams <= _num_games){
         // can't create schedule for teams less than number of games
-        out << QString("Schedule is invalid, can't create schedule for less teams than number of games: ")+num_teams+"<="+_num_games << endl;
+        out << QString("Schedule is invalid, can't create schedule for less teams than number of games: ")+QString::number(num_teams)+"<="+QString::number(_num_games) << endl;
         return 1;
     }
     if (num_teams < 2*_num_games){
@@ -81,7 +81,7 @@ int schedule::generate(void)
             }
         }
     }
-    if (alternate == sched_alt_odd){
+    if (alternate == sched_alt_even){
         // odd sched we need to swap one list but only the last half rounded up.
        int half = (num_teams/4);
        int end = list1_alt->count()-1;
@@ -90,7 +90,7 @@ int schedule::generate(void)
            half++;
            end--;
        }
-       half = (num_teams/4)+1;
+       half = (num_teams/4);
        end = list2_alt->count()-1;
        while (half<end){
            list2_alt->swap(half,end);
@@ -98,37 +98,44 @@ int schedule::generate(void)
            end--;
        }
     }
-    bool doOne = true;
+    if (alternate == sched_alt_odd){
+        // can't create schedule for this yet, need a better algorithm
+        out << QString("Can't create schedule for alternate odd schedule: ")+QString::number(num_teams)+" teams / games:"+QString::number(_num_games) << endl;
+        return 1;
+    }
+    bool dontShiftFirst = false;
     for (int day=1;day<=_num_games;day++){
         QList<game*>* dayList = new QList<game*>();
         generateGames(day, dayList, (*home), (*away));
         if (day%2==0){
-            home = &list1;
-            away = &list2;
             if ((alternate != sched_fine)
-                    &&(day+1>num_teams/2)){
-                home = &list2_alt;
-                away = &list1_alt;
-                if (doOne) {
-                    doOne = false;
-                    continue;
-                }
-            }
-            shiftScheduleRight( *home );
-        }
-        else{
-            home = &list2;
-            away = &list1;
-            if ((alternate != sched_fine)\
                     &&(day+1>num_teams/2)){
                 home = &list1_alt;
                 away = &list2_alt;
-                if (doOne) {
-                    doOne = false;
-                    continue;
+                if (dontShiftFirst) {
+                    shiftScheduleLeft( *home );
                 }
+                dontShiftFirst = true;
+            }else{
+                home = &list1;
+                away = &list2;
+                shiftScheduleRight( *home );
             }
-            shiftScheduleLeft( *home );
+        }
+        else{
+            if ((alternate != sched_fine)\
+                    &&(day+1>num_teams/2)){
+                home = &list2_alt;
+                away = &list1_alt;
+                if (dontShiftFirst) {
+                    shiftScheduleRight( *home );
+                }
+                dontShiftFirst = true;
+            }else{
+                home = &list2;
+                away = &list1;
+                shiftScheduleLeft( *home );
+            }
         }
 
         printSchedule(QString("Game ")+QString::number(day), *dayList);
