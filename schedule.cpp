@@ -81,23 +81,6 @@ int schedule::generate(void)
             }
         }
     }
-    if (alternate == sched_alt_even){
-        // odd sched we need to swap one list but only the last half rounded up.
-       int half = (num_teams/4);
-       int end = list1_alt->count()-1;
-       while (half<end){
-           list1_alt->swap(half,end);
-           half++;
-           end--;
-       }
-       half = (num_teams/4);
-       end = list2_alt->count()-1;
-       while (half<end){
-           list2_alt->swap(half,end);
-           half++;
-           end--;
-       }
-    }
     if (alternate == sched_alt_odd){
         // can't create schedule for this yet, need a better algorithm
         out << QString("Can't create schedule for alternate odd schedule: ")+QString::number(num_teams)+" teams / games:"+QString::number(_num_games) << endl;
@@ -113,7 +96,7 @@ int schedule::generate(void)
                 home = &list1_alt;
                 away = &list2_alt;
                 if (dontShiftFirst) {
-                    shiftScheduleLeft( *home );
+                    shiftAltScheduleLeft( *home );
                 }
                 dontShiftFirst = true;
             }else{
@@ -128,7 +111,7 @@ int schedule::generate(void)
                 home = &list2_alt;
                 away = &list1_alt;
                 if (dontShiftFirst) {
-                    shiftScheduleRight( *home );
+                    shiftAltScheduleRight( *home );
                 }
                 dontShiftFirst = true;
             }else{
@@ -168,6 +151,24 @@ void schedule::shiftScheduleLeft( QList<team*>* home )
 {
     team* temp = home->takeFirst();
     home->append(temp);
+}
+
+void schedule::shiftAltScheduleRight( QList<team*>* home )
+{
+    int pos = (home->count()/2);
+    team* temp = home->takeLast();
+    home->insert(pos,temp);
+    temp = home->takeAt(pos-1);
+    home->insert(0,temp);
+}
+
+void schedule::shiftAltScheduleLeft( QList<team*>* home )
+{
+    int pos = (home->count()/2)-1;
+    team* temp = home->takeFirst();
+    home->insert(pos,temp);
+    temp = home->takeAt(pos+1);
+    home->insert(home->count(),temp);
 }
 
 int schedule::generateGames(int day, QList<game*>* dayGames, const QList<team*>* home, const QList<team*>* away )
