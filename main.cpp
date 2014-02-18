@@ -2,6 +2,8 @@
 #include <QCoreApplication>
 #include <QStringList>
 #include <QString>
+#include <QTextStream>
+
 #include "team.h"
 #include "game.h"
 #include "schedule.h"
@@ -31,8 +33,8 @@ int main(int argc, char *argv[])
     newSched.addTeam( new team(Dwarf,"Bad News Beards","Bear (Geoff)"));
     newSched.addTeam( new team(Khemri,"Bonerattle ","Fidius (Bill)" ));
     newSched.addTeam( new team(ChaosDwarf,"Hashuts Hellfires ","Wedge22 (Kristian)"));
-    newSched.addTeam( new team(Human,"Chippendales ","Edwad (Ed)" ));
-    newSched.addTeam( new team(Human,"Hogan's Heroes ","Redman (Tony)"));
+//    newSched.addTeam( new team(Human,"Chippendales ","Edwad (Ed)" ));
+//    newSched.addTeam( new team(Human,"Hogan's Heroes ","Redman (Tony)"));
 
     return newSched.generate();
 }

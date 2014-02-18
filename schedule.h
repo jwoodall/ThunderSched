@@ -10,7 +10,10 @@ private:
 	int _max_teams;
     QList<team*> _teams;
     QList<game*> _games;
-
+    enum alternate_sched { sched_fine
+                           , sched_alt_odd
+                           , sched_alt_even
+                         };
 
 public:
 	schedule(int num_games);
