@@ -121,7 +121,7 @@ int schedule::generate(void)
             }
         }
 
-        printSchedule(QString("Game ")+QString::number(day), *dayList);
+//        printSchedule(QString("Game ")+QString::number(day), *dayList);
     }
     if (!validateSchedule()){
         QTextStream out(stdout);
