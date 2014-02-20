@@ -19,6 +19,8 @@ public:
 	schedule(int num_games);
 	~schedule(void);
 	int generate();
+    int numGames(){return _num_games;}
+    void numGames(int num_games){_num_games=num_games;}
     int addTeam(team* team1);
     int generateGames(int day, QList<game*>* dayGames, const QList<team*>* home, const QList<team*>* away );
     void shiftScheduleRight( QList<team*>* home );
