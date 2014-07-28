@@ -1,4 +1,5 @@
 #include <QTextStream>
+#include <QFile>
 #include "game.h"
 #include "team.h"
 
@@ -15,15 +16,15 @@ game::~game(void)
 {
 }
 
-void game::print()
+void game::print(QFile &file)
 {
-    QTextStream out(stdout);
-    out << _home->name();
-    out << " (" << _home->race() << ") : ";
-    out << _home->coach();
-    out << " vs ";
-    out << _away->name();
-    out << " (" << _away->race() << ") : ";
-    out << _away->coach();
+    QTextStream out(&file);
+    out << "[url=" << _home->team_url() <<  "]" << _home->name() <<"[/url]";
+    out << " (" << _home->raceName() << ") : ";
+    out << "[url=" << _home->coach_url() <<  "]" << _home->coach() <<"[/url]";
+    out << " [b]vs[/b] ";
+    out << "[url=" << _away->team_url() <<  "]" << _away->name() <<"[/url]";
+    out << " (" << _away->raceName() << ") : ";
+    out << "[url=" << _away->coach_url() <<  "]" << _away->coach() <<"[/url]";
     out << endl;
 }

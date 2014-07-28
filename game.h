@@ -1,3 +1,4 @@
+#include <QFile>
 #include "team.h"
 
 #pragma once
@@ -12,7 +13,7 @@ public:
 
     game(team* home, team* away, int day);
 	~game(void);
-    void print();
+    void print(QFile &file);
     void validate(){_valid = _home!=_away;}
     QString dayString(){return QString::number(_day);}
     int day(){return _day;}

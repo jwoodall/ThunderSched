@@ -13,47 +13,104 @@ int main(int argc, char *argv[])
 	QCoreApplication a(argc, argv);
     QTextStream out(stdout);
     out << "ThunderSchedule version 0.1" << endl;
-    schedule newSched(5);
-    for (int games=5;games<=15;games++ ){
-        for (int num_tm=1;num_tm<=30;num_tm++ ){
 
-            out << QString("*************") << endl;
-            out << QString("Schedule for ")+QString::number(games)+" games, "+QString::number(num_tm)+" teams."  << endl;
-            newSched = schedule(games);
-            if (num_tm>0) newSched.addTeam( new team(Skaven,"Death Runs Faster","Gollumullog") );
-            if (num_tm>1) newSched.addTeam( new team(DarkElf,"Queens of the Rampage","Gustav (Dave W.)") );
-            if (num_tm>2) newSched.addTeam( new team(HighElf,"Disposable Heroes","Spaceman Spiff (Lee)" ));
-            if (num_tm>3) newSched.addTeam( new team(WoodElf,"Heartwood Harlequins","MacPhee (Mike MacPhee)"));
-            if (num_tm>4) newSched.addTeam( new team(DarkElf,"Storm Crows","Ocrumsprug (Shawn W.)" ));
-            if (num_tm>5) newSched.addTeam( new team(Elf,"Loreal Arrowettes","General Jason (Craig)"));
-            if (num_tm>6) newSched.addTeam( new team(HighElf,"Ulthuan Lords","Poundfist (Mike McAree)" ));
-            if (num_tm>7) newSched.addTeam( new team(DarkElf,"Dark Side of the Faerie","Darkangeldave (Dave O.)"));
-            if (num_tm>8) newSched.addTeam( new team(Norse,"Ravers Re-Booted","dva13 (Duncan)" ));
-            if (num_tm>9) newSched.addTeam( new team(WoodElf,"Druid's Dream","Gazgul (Mike L.)"));
-            if (num_tm>10) newSched.addTeam( new team(ChaosDwarf,"The Breakfast Club ","Kodeack (Brent)" ));
-            if (num_tm>11) newSched.addTeam( new team(Chaos,"Popcorn Fools","Osirus11 (Ryder)"));
-            if (num_tm>12) newSched.addTeam( new team(Dwarf,"Half Pints","Squirrel (Mark)" ));
-            if (num_tm>13) newSched.addTeam( new team(ChaosDwarf,"40 Grinders","Blammaham (Steve)"));
-            if (num_tm>14) newSched.addTeam( new team(Human,"Harshmellow Darkstars ","Smallpox (James)" ));
-            if (num_tm>15) newSched.addTeam( new team(Dwarf,"Bad News Beards","Bear (Geoff)"));
-            if (num_tm>16) newSched.addTeam( new team(Khemri,"Bonerattle ","Fidius (Bill)" ));
-            if (num_tm>17) newSched.addTeam( new team(ChaosDwarf,"Hashuts Hellfires ","Wedge22 (Kristian)"));
-            if (num_tm>18) newSched.addTeam( new team(Human,"Chippendales ","Edwad (Ed)" ));
-            if (num_tm>19) newSched.addTeam( new team(Human,"Hogan's Heroes ","Redman (Tony)"));
+    int games = 10;
+    int num_teams_b = 0;
+    int num_teams_c = 0;
+  /*
+    schedule newSched_B(games);
+    newSched_B = schedule(games);
 
-            if (num_tm>20) newSched.addTeam( new team(ChaosDwarf,"Team 21","Kodeack (Brent)" ));
-            if (num_tm>21) newSched.addTeam( new team(Chaos,"Team 22 Fools","Osirus11 (Ryder)"));
-            if (num_tm>22) newSched.addTeam( new team(Dwarf,"Team 23 Pints","Squirrel (Mark)" ));
-            if (num_tm>23) newSched.addTeam( new team(ChaosDwarf,"Team 24 Grinders","Blammaham (Steve)"));
-            if (num_tm>24) newSched.addTeam( new team(Human,"Team 25 Darkstars ","Smallpox (James)" ));
-            if (num_tm>25) newSched.addTeam( new team(Dwarf,"Team 26 Beards","Bear (Geoff)"));
-            if (num_tm>26) newSched.addTeam( new team(Khemri,"Team 27 ","Fidius (Bill)" ));
-            if (num_tm>27) newSched.addTeam( new team(ChaosDwarf,"Team 28 Hellfires ","Wedge22 (Kristian)"));
-            if (num_tm>28) newSched.addTeam( new team(Human,"Team 29 ","Edwad (Ed)" ));
-            if (num_tm>29) newSched.addTeam( new team(Human,"Team 30 Heroes ","Redman (Tony)"));
-            newSched.generate();
-        }
-    }
+
+    // B -League Season 17
+    newSched_B.addTeam( new team(ChaosDwarf,"Apocalypto","J.Mac") );
+    newSched_B.addTeam( new team(Lizardmen,"Serpentine glory","Murray") );
+    newSched_B.addTeam( new team(Chaos,"Freaks and Weirdos","Lee") );
+    newSched_B.addTeam( new team(Dwarf,"Bad News Beards","Geoff") );
+    newSched_B.addTeam( new team(Necromantic,"FDMJ","Dan C") );
+    newSched_B.addTeam( new team(Human,"Verde Slackers","James M.") );
+    newSched_B.addTeam( new team(Slann,"Freezing Reign","Greg F.") );
+    newSched_B.addTeam( new team(Orc,"Waauugghh Mash'een ","Ian S") );
+    newSched_B.addTeam( new team(Orc,"Angmar Express","Dave W") );
+    newSched_B.addTeam( new team(Norse,"F'N Givers ","Tyler") );
+    newSched_B.addTeam( new team(ChaosDwarf,"40Grinders ","Steve") );
+    newSched_B.addTeam( new team(Chaos,"Popcorn Fools ","Ryder") );
+    newSched_B.addTeam( new team(ChaosDwarf,"Hashut's Hellfires","Kristian") );
+    newSched_B.addTeam( new team(ChaosDwarf,"Phelegraen Marauders","Jason W") );
+    newSched_B.addTeam( new team(HighElf,"Eataine Excelsiors","Jon") );
+    newSched_B.addTeam( new team(Slann,"Leaps of Faith","Kavin") );
+
+
+    num_teams_b = newSched_B.numberTeams();
+
+    out << QString("*************") << endl;
+    out << QString("Schedule for ")+QString::number(games)+" games, "+QString::number(num_teams_b)+" teams."  << endl;
+
+    newSched_B.generate();
+*/
+    // C-League Season 17
+    schedule newSched_C(games);
+    newSched_C = schedule(games);
+
+
+    newSched_C.addTeam( new team(Necromantic,"RakNaFobYa","dva13","71","417") );
+    newSched_C.addTeam( new team(Undead,"Grave Diggerz","Mr. Bloodwiser","91","431") );
+    newSched_C.addTeam( new team(HighElf,"Chrace White-Lions","keggiemckill","10","423") );
+    newSched_C.addTeam( new team(Norse,"Sons of Freedom","NitNit","52","418") );
+    newSched_C.addTeam( new team(DarkElf,"Dirty Elven Scoundrels","Trentusdementus","77","426") );
+    newSched_C.addTeam( new team(Lizardmen,"GatorBoyz","Sallacious","15","424") );
+    newSched_C.addTeam( new team(HighElf,"Smurf that Smurf!","Edwad","76","421") );
+    newSched_C.addTeam( new team(Chaos,"Need to Feed","Redman","21","419") );
+    newSched_C.addTeam( new team(DarkElf,"Niriak Yellowjakets ","Bubbles","9","431") );
+    newSched_C.addTeam( new team(Human,"Silly English Kannniggits.","Poundfist","6","425") );
+    newSched_C.addTeam( new team(Nurgle,"Newly Infected","Squirrel","103","427") );
+    newSched_C.addTeam( new team(DarkElf,"Zardok Pitfighters","Cyrust59","60","500") );
+    newSched_C.addTeam( new team(Undead,"UnknownTeam2","Dylanator","19","500") );
+    newSched_C.addTeam( new team(Chaos,"bringers of pain","1000 Deaths","105","428") );
+    newSched_C.addTeam( new team(Human,"UnknownTeam4","Pythrr","114","500") );
+    newSched_C.addTeam( new team(Undead,"Boneyard Brutes","Khysanth","115","433") );
+    newSched_C.addTeam( new team(Orc,"Rangoon Typhoon","MacPhee","51","500") );
+    newSched_C.addTeam( new team(HighElf,"Sizzlin' Spirals","Badcuz","112","500") );
+    newSched_C.addTeam( new team(ChaosPact,"UnknownTeam6","Darkangeldave","48","500") );
+    newSched_C.addTeam( new team(Amazon,"Titty Twister","UrukHai","97","500") );
+
+    num_teams_c = newSched_C.numberTeams();
+
+    out << QString("*************") << endl;
+    out << QString("Schedule for ")+QString::number(games)+" games, "+QString::number(num_teams_c)+" teams."  << endl;
+    newSched_C.generate();
+
+/*
+    // Minor Season 17
+    schedule newSched_M(5);
+    newSched_M = schedule(5);
+
+
+    newSched_M.addTeam( new team(Khemri,"Old Kingdom Pharaohs","Murray") );
+    newSched_M.addTeam( new team(ChaosPact,"Null Zone all Blanks","Jon") );
+    newSched_M.addTeam( new team(Halfling,"Puggy's Revenge","Matt") );
+    newSched_M.addTeam( new team(Goblin,"Star Player Killerz","Cam") );
+    newSched_M.addTeam( new team(Chaos,"Demon Legion","Jesse") );
+    newSched_M.addTeam( new team(Goblin,"Villainous Kaba","Shawn") );
+    newSched_M.addTeam( new team(Amazon,"Odelay","Mike Adams") );
+    newSched_M.addTeam( new team(Halfling,"No Expectations","Geoff") );
+    newSched_M.addTeam( new team(ChaosDwarf,"Taco Bull","Ed L.") );
+    newSched_M.addTeam( new team(Human,"Dm Electric","Dylan") );
+    newSched_M.addTeam( new team(ChaosPact,"Powers of Pain","Ivan") );
+    newSched_M.addTeam( new team(Norse,"Ravers Rebooted","Duncan") );
+    newSched_M.addTeam( new team(Vampire,"Darknight Regen","Kavin") );
+    newSched_M.addTeam( new team(Elf,"Rank Amateurs ","Trent") );
+    newSched_M.addTeam( new team(ChaosPact,"Positive Thinking","Dan C.") );
+    newSched_M.addTeam( new team(Human,"Backdoor Blitzers","Tyler") );
+    newSched_M.addTeam( new team(HighElf,"Mighty High","Kristian") );
+    newSched_M.addTeam( new team(HighElf,"Swiftsure Royals","Steve") );
+
+    int num_teams_m = newSched_M.numberTeams();
+
+    out << QString("*************") << endl;
+    out << QString("Schedule for ")+QString::number(5)+" games, "+QString::number(num_teams_m)+" teams."  << endl;
+    newSched_M.generate();
+*/
     return 0;
 }
 

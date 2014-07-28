@@ -2,6 +2,8 @@
 #include <QString>
 
 QStringList team::Races = QStringList()<< "Amazon"<<"Chaos"<<"ChaosDwarf"<<"ChaosPact"<<"DarkElf"<<"Dwarf"<<"Elf"<<"Goblin"<<"Halfling"<<"HighElf"<<"Human"<<"Khemri"<<"Lizardmen"<<"Necromantic"<<"Norse"<<"Nurgle"<<"Ogre"<<"Orc"<<"Skaven"<<"Slann"<<"Undead"<<"Underworld"<<"Vampire"<<"WoodElf";
+QString team::_team_url = "http://thunderbowl.ca/tbsn/index.php?section=objhandler&type=1&obj=2&obj_id=";
+QString team::_coach_url = "http://thunderbowl.ca/tbsn/index.php?section=objhandler&type=1&obj=3&obj_id=";
 
 team::team()
 {
@@ -14,9 +16,18 @@ team::team( const team& team1 )
 }
 
 team::team(int race, const char* name, const char* coach)
+    : _race(race)
+    , _name(name)
+    , _coach(coach)
+{
+}
+
+team::team(int race, const char* name, const char* coach,  const char* coach_id,  const char* team_id)
 	: _race(race)
 	, _name(name)
     , _coach(coach)
+    , _coach_id(coach_id)
+    , _team_id(team_id)
 {
 }
 

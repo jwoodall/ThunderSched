@@ -1,5 +1,6 @@
 #include <QTextStream>
 #include <QSet>
+#include <QFile>
 #include "schedule.h"
 
 schedule::schedule(int num_games)
@@ -40,6 +41,14 @@ int schedule::generate(void)
     QList<team*>** home = &list1;
     QList<team*>** away = &list2;
 
+    // calculate bash/finesse
+//    _bash << Chaos << ChaosDwarf << ChaosPact << Dwarf << Khemri << Lizardmen << Necromantic << Norse << Nurgle << Ogre << Orc << Undead;
+//    _finesse << Amazon << DarkElf << Elf << Goblin << Halfling << HighElf << Human << Skaven << Slann << Vampire << WoodElf << Underworld;
+
+    _bash << Chaos << ChaosDwarf << Dwarf << Khemri<< Necromantic << Ogre << Orc << Undead  << Norse  << Human;
+    _finesse << Amazon << DarkElf << Elf << Goblin << Halfling << HighElf << Nurgle << Skaven << Slann << Vampire << WoodElf << Underworld << Lizardmen << ChaosPact;
+
+    //
     int num_teams = _teams.count();
     if (num_teams % 2 == 1){
         // can't use odd number of teams
@@ -121,7 +130,7 @@ int schedule::generate(void)
             }
         }
 
-//        printSchedule(QString("Game ")+QString::number(day), *dayList);
+        printSchedule(QString("Game ")+QString::number(day), *dayList);
     }
     if (!validateSchedule()){
         QTextStream out(stdout);
@@ -133,11 +142,17 @@ int schedule::generate(void)
 
 void schedule::printSchedule( QString header, QList<game*> daySched )
 {
-    QTextStream out(stdout);
-    out << endl << endl;
-    out << header << endl;
-    foreach(game* g1, daySched){
-        g1->print();
+    QFile file("c://out.txt");
+    if(file.open(QFile::Append | QFile::Text))
+    {
+        file.seek(file.size());
+        QTextStream out(&file);
+        out << endl << endl;
+        out << header << endl;
+        foreach(game* g1, daySched){
+            g1->print(file);
+        }
+        file.close();
     }
 }
 
@@ -189,7 +204,9 @@ bool schedule::validateSchedule()
     out << "  Count teams" << endl;
     foreach(team* tm, _teams){
         int count = getGameCount(tm);
-        out << tm->name() << ": " << count << " total games" << endl;
+        int count_bash = getBashGameCount(tm);
+        int count_finesse = getFinesseGameCount(tm);
+        out << tm->name() << ": " << count << " total games" << ": B/F" << count_bash << "/" << count_finesse << endl;
         if (count != _num_games) return false;
         if (!verifyTeam(tm)) return false;
     }
@@ -208,6 +225,34 @@ int schedule::getGameCount(team* team1)
     foreach(game* gm, _games){
         if ((gm->away() == team1) ||
                 (gm->home() == team1)) count++;
+    }
+    return count;
+}
+
+int schedule::getBashGameCount(team* team1)
+{
+    int count = 0;
+    foreach(game* gm, _games){
+        if (gm->away() == team1){
+            if (_bash.contains(gm->home()->race())) count++;
+        }
+        if (gm->home() == team1){
+            if (_bash.contains(gm->away()->race())) count++;
+        }
+    }
+    return count;
+}
+
+int schedule::getFinesseGameCount(team* team1)
+{
+    int count = 0;
+    foreach(game* gm, _games){
+        if (gm->away() == team1){
+            if (_finesse.contains(gm->home()->race())) count++;
+        }
+        if (gm->home() == team1){
+            if (_finesse.contains(gm->away()->race())) count++;
+        }
     }
     return count;
 }
