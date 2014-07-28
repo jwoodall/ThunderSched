@@ -17,9 +17,11 @@ TEMPLATE = app
 
 HEADERS += team.h \
            schedule.h \
-           game.h
+           game.h \
+    coach.h
 
 SOURCES += main.cpp \
            team.cpp \
            schedule.cpp \
-           game.cpp
+           game.cpp \
+    coach.cpp
