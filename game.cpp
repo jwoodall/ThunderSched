@@ -19,12 +19,33 @@ game::~game(void)
 void game::print(QFile &file)
 {
     QTextStream out(&file);
-    out << "[url=" << _home->team_url() <<  "]" << _home->name() <<"[/url]";
+    if (_home->team_id()==""){
+        out << _home->name();
+    }else{
+        out << "[url=" << _home->team_url() <<  "]" << _home->name() <<"[/url]";
+    }
+
     out << " (" << _home->raceName() << ") : ";
-    out << "[url=" << _home->coach_url() <<  "]" << _home->coach() <<"[/url]";
+
+    if (_home->coach_id()==""){
+        out << _home->coach();
+    }else{
+        out << "[url=" << _home->coach_url() <<  "]" << _home->coach() <<"[/url]";
+    }
     out << " [b]vs[/b] ";
-    out << "[url=" << _away->team_url() <<  "]" << _away->name() <<"[/url]";
+
+    if (_away->team_id()==""){
+        out << _away->name();
+    }else{
+        out << "[url=" << _away->team_url() <<  "]" << _away->name() <<"[/url]";
+    }
+
     out << " (" << _away->raceName() << ") : ";
-    out << "[url=" << _away->coach_url() <<  "]" << _away->coach() <<"[/url]";
+
+    if (_away->coach_id()==""){
+        out << _away->coach();
+    }else{
+        out << "[url=" << _away->coach_url() <<  "]" << _away->coach() <<"[/url]";
+    }
     out << endl;
 }

@@ -53,6 +53,8 @@ public:
 	 bool operator==( const team& rhs );
 
      QString name() {return _name;};
+     QString team_id() {return _team_id;};
+     QString coach_id() {return _coach_id;};
      QString coach() {return _coach;};
      int race() {return _race;};
      QString raceName() {return Races.value(_race);};
