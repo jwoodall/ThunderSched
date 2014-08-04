@@ -3,15 +3,27 @@
 #include <QStringList>
 #include <QString>
 #include <QTextStream>
+#include <QtSql>
 
 #include "team.h"
 #include "game.h"
 #include "schedule.h"
+#include "sql_queries.h"
+
 
 int main(int argc, char *argv[])
 {
 	QCoreApplication a(argc, argv);
     QTextStream out(stdout);
+
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("thunderbowl.sqlite");
+    if (!db.open()) {
+        QStringList r = QSqlDatabase::drivers();
+        QString drivers = r.join(", ");
+        return 1;
+    }
+
     out << "ThunderSchedule version 0.1" << endl;
 
     int games = 10;
@@ -24,7 +36,7 @@ int main(int argc, char *argv[])
 
     // B -League Season 17
     newSched_B.addTeam( new team(ChaosDwarf,"Apocalypto","Rimmer","7","380") );
-    newSched_B.addTeam( new team(Chaos,"Freaks and Weirdos","Spaceman Spiff","18","14") );
+    newSched_B.addTeam( new team(Chaos,"Freaks and Weirdos","Spaceman Spiff","14","18") );
     newSched_B.addTeam( new team(Dwarf,"Bad News Beards","Bear","32","198") );
     newSched_B.addTeam( new team(Orc,"Waauugghh Mash'een ","Dah Koach","99","378") );
     newSched_B.addTeam( new team(Human,"Verde Slackers","Smallpox","104","359") );
@@ -37,7 +49,7 @@ int main(int argc, char *argv[])
     newSched_B.addTeam( new team(Chaos,"Popcorn Fools ","Osirus11","23","325") );
     newSched_B.addTeam( new team(ChaosDwarf,"Hashut's Hellfires","Wedge22","18","235") );
     newSched_B.addTeam( new team(Lizardmen,"Pax Britannia","Gazgul","30","171") );
-    newSched_B.addTeam( new team(HighElf,"Eataine Excelsiors","Endycurus","47","71") );
+    newSched_B.addTeam( new team(HighElf,"Eataine Excelsiors","Endycarus","47","71") );
     newSched_B.addTeam( new team(Slann,"Leaps of Faith","Warpstone","22","324") );
     newSched_B.addTeam( new team(Necromantic,"Full Death Metal Jacket","VampireLogan","93","210") );
     newSched_B.addTeam( new team(DarkElf,"Storm Crows","Ocrumsprug","74","226") );
@@ -68,12 +80,12 @@ int main(int argc, char *argv[])
     newSched_C.addTeam( new team(Human,"Silly English Kannniggits.","Poundfist","6","425") );
     newSched_C.addTeam( new team(Nurgle,"Newly Infected","Squirrel","103","427") );
     newSched_C.addTeam( new team(DarkElf,"Zardok Pitfighters","Cyrust59","60","438") );
-    newSched_C.addTeam( new team(Undead,"UnknownTeam2","Dylanator","19","500") );
+    newSched_C.addTeam( new team(Undead,"Six Feet Under","Dylanator","19","441") );
     newSched_C.addTeam( new team(Chaos,"bringers of pain","1000 Deaths","105","428") );
-    newSched_C.addTeam( new team(Human,"Reavers go West","Pythrr","114","439") );
+    newSched_C.addTeam( new team(Orc,"Reavers go West","Pythrr","114","439") );
     newSched_C.addTeam( new team(Undead,"Boneyard Brutes","Khysanth","115","433") );
     newSched_C.addTeam( new team(Orc,"Rangoon Typhoon","MacPhee","51","435") );
-    newSched_C.addTeam( new team(HighElf,"Sizzlin' Spirals","Badcuz","112","500") );
+    newSched_C.addTeam( new team(HighElf,"Sizzlin' Spirals","Badcuz","112","440") );
     newSched_C.addTeam( new team(ChaosPact,"The Expendables","Darkangeldave","48","437") );
     newSched_C.addTeam( new team(Amazon,"Titty Twister","UrukHai","97","436") );
 
@@ -89,7 +101,7 @@ int main(int argc, char *argv[])
 
 
     newSched_M.addTeam( new team(Khemri,"Old Kingdom Pharaohs","Gimli","31","386") );
-    newSched_M.addTeam( new team(ChaosPact,"Null Zone all Blanks","Endycurus","47","394") );
+    newSched_M.addTeam( new team(ChaosPact,"Null Zone all Blanks","Endycarus","47","394") );
     newSched_M.addTeam( new team(Halfling,"Puggy's Revenge","Majyk","92","383") );
     newSched_M.addTeam( new team(Goblin,"Star Player Killerz","Mr. Bloodwiser","91","391") );
     newSched_M.addTeam( new team(Chaos,"Demon Legion","Sallacious","15","402") );

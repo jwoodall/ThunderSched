@@ -1,12 +1,12 @@
 #include "coach.h"
 
-player::coach(int id, QString handle)
+coach::coach(int id, QString handle)
     : _id(id)
     , _handle(handle)
 {
 }
 
-player::coach(int id, QString handle, QString name, QString phone, QString email)
+coach::coach(int id, QString handle, QString name, QString phone, QString email)
     : _id(id)
     , _handle(handle)
     , _name(name)

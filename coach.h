@@ -1,6 +1,8 @@
 #ifndef COACH_H
 #define COACH_H
 
+#include <QString>
+
 class coach
 {
 private:

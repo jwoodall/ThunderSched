@@ -5,8 +5,8 @@
 #-------------------------------------------------
 
 QT       += core
-
-QT       -= gui
+QT       += gui
+QT       += sql
 
 TARGET = ThunderSched
 CONFIG   += console
@@ -18,10 +18,11 @@ TEMPLATE = app
 HEADERS += team.h \
            schedule.h \
            game.h \
-    coach.h
+           coach.h \
+    sql_queries.h
 
 SOURCES += main.cpp \
            team.cpp \
            schedule.cpp \
            game.cpp \
-    coach.cpp
+           coach.cpp
