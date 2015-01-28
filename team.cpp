@@ -15,14 +15,14 @@ team::team( const team& team1 )
 	_name = team1._name;
 }
 
-team::team(int race, const char* name, const char* coach)
+team::team(int race, QString name, QString coach)
     : _race(race)
     , _name(name)
     , _coach(coach)
 {
 }
 
-team::team(int race, const char* name, const char* coach,  const char* coach_id,  const char* team_id)
+team::team(int race, QString name, QString coach,  QString coach_id,  QString team_id)
 	: _race(race)
 	, _name(name)
     , _coach(coach)
