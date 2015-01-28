@@ -236,12 +236,12 @@ bool schedule::validateSchedule()
         int count_away = getAwayGameCount(tm);
 
 
-        out << tm->name() << ": " << count << " total games" << ": " << count_home << "(H) / " << count_away << "(A)";
+        out << tm->name() << ": " << count << " total games" << ": " << count_home << "H/" << count_away << "A";
         if (count == 5) {
 //            Minor league no home/away
             out << endl;
         }else{
-            out << ": " << count_bash << "(B) / " << count_finesse << "(F)"<< endl;
+            out << ": " << count_bash << "B/" << count_finesse << "F"<< endl;
         }
 
         if (count != _num_games) return false;
