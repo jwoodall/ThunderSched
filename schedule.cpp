@@ -3,9 +3,10 @@
 #include <QFile>
 #include "schedule.h"
 
-schedule::schedule(int num_games)
+schedule::schedule(QString filename, int num_games)
 	:_num_games(num_games)
     , _max_teams(100)
+    , _filename (filename)
 {
 }
 
@@ -96,6 +97,9 @@ int schedule::generate(void)
         out << QString("Can't create schedule for alternate odd schedule: ")+QString::number(num_teams)+" teams / games:"+QString::number(_num_games) << endl;
         return 1;
     }
+    if ((num_teams == 12)&&(_num_games == 10)){
+         return generate12for10();
+    }
     bool dontShiftFirst = false;
     for (int day=1;day<=_num_games;day++){
         QList<game*>* dayList = new QList<game*>();
@@ -143,7 +147,7 @@ int schedule::generate(void)
 
 void schedule::printSchedule( QString header, QList<game*> daySched )
 {
-    QFile file("c://out.txt");
+    QFile file(_filename);
     if(file.open(QFile::Append | QFile::Text))
     {
         file.seek(file.size());
@@ -197,8 +201,28 @@ int schedule::generateGames(int day, QList<game*>* dayGames, const QList<team*>*
     }
     return 0;
 }
+
+bool schedule::validateGames()
+{
+    foreach(game* gm, _games){
+        int count_home = getHomeGameCount(gm->home());
+        int count_away = getAwayGameCount(gm->away());
+        if ((count_home > _num_games/2) && (count_away > _num_games/2)){
+            // swap
+            gm->swap();
+        }
+        if ((count_home < _num_games/2) && (count_away < _num_games/2)){
+            // swap
+            gm->swap();
+        }
+    }
+    return true;
+}
+
 bool schedule::validateSchedule()
 {
+    validateGames();
+
     QTextStream out(stdout);
     out << "Validating..." << endl;
 
@@ -207,7 +231,19 @@ bool schedule::validateSchedule()
         int count = getGameCount(tm);
         int count_bash = getBashGameCount(tm);
         int count_finesse = getFinesseGameCount(tm);
-        out << tm->name() << ": " << count << " total games" << ": B/F" << count_bash << "/" << count_finesse << endl;
+
+        int count_home = getHomeGameCount(tm);
+        int count_away = getAwayGameCount(tm);
+
+
+        out << tm->name() << ": " << count << " total games" << ": " << count_home << "(H) / " << count_away << "(A)";
+        if (count == 5) {
+//            Minor league no home/away
+            out << endl;
+        }else{
+            out << ": " << count_bash << "(B) / " << count_finesse << "(F)"<< endl;
+        }
+
         if (count != _num_games) return false;
         if (!verifyTeam(tm)) return false;
     }
@@ -220,12 +256,31 @@ bool schedule::validateSchedule()
     }
     return true;
 }
+
 int schedule::getGameCount(team* team1)
 {
     int count = 0;
     foreach(game* gm, _games){
         if ((gm->away() == team1) ||
                 (gm->home() == team1)) count++;
+    }
+    return count;
+}
+
+int schedule::getAwayGameCount(team* team1)
+{
+    int count = 0;
+    foreach(game* gm, _games){
+        if (gm->away() == team1) count++;
+    }
+    return count;
+}
+
+int schedule::getHomeGameCount(team* team1)
+{
+    int count = 0;
+    foreach(game* gm, _games){
+        if (gm->home() == team1) count++;
     }
     return count;
 }
@@ -531,6 +586,219 @@ int schedule::generate18for10(void)
     list2->append(_teams[12]);
     list1->append(_teams[7]);
     list2->append(_teams[17]);
+    generateGames(day, dayList, (list1), (list2));
+    printSchedule(QString("Game ")+QString::number(day), *dayList);
+
+    if (!validateSchedule()){
+        QTextStream out(stdout);
+        out << "Schedule is invalid." << endl;
+        return 1;
+    }
+    return 0;
+}
+
+int schedule::generate12for10(void)
+{
+    QTextStream out(stdout);
+    int count=0;
+    QList<team*>* list1 = new QList<team*>;
+    QList<team*>* list2 = new QList<team*>;
+
+
+    int num_teams = _teams.count();
+
+    // populate the lists
+    foreach(team* team1, _teams){
+        count++;
+        if(count<=num_teams/2){
+            list1->append(team1);
+        }else{
+            list2->append(team1);
+        }
+    }
+
+    QList<game*>* dayList = new QList<game*>();
+    int day = 1;
+    generateGames(day, dayList, (list1), (list2));
+    printSchedule(QString("Game ")+QString::number(day), *dayList);
+
+    day = 2;
+    list1->clear();
+    list2->clear();
+    dayList->clear();
+
+    list1->append(_teams[4]);
+    list2->append(_teams[6]);
+    list1->append(_teams[5]);
+    list2->append(_teams[8]);
+    list1->append(_teams[3]);
+    list2->append(_teams[0]);
+    list1->append(_teams[10]);
+    list2->append(_teams[11]);
+    list1->append(_teams[2]);
+    list2->append(_teams[7]);
+    list1->append(_teams[1]);
+    list2->append(_teams[9]);
+
+    generateGames(day, dayList, (list1), (list2));
+    printSchedule(QString("Game ")+QString::number(day), *dayList);
+
+    day = 3;
+    list1->clear();
+    list2->clear();
+    dayList->clear();
+    list1->append(_teams[0]);
+    list2->append(_teams[7]);
+    list1->append(_teams[6]);
+    list2->append(_teams[8]);
+    list1->append(_teams[2]);
+    list2->append(_teams[11]);
+    list1->append(_teams[1]);
+    list2->append(_teams[4]);
+    list1->append(_teams[5]);
+    list2->append(_teams[9]);
+    list1->append(_teams[3]);
+    list2->append(_teams[10]);
+
+    generateGames(day, dayList, (list1), (list2));
+    printSchedule(QString("Game ")+QString::number(day), *dayList);
+
+    day = 4;
+    list1->clear();
+    list2->clear();
+    dayList->clear();
+
+    list1->append(_teams[2]);
+    list2->append(_teams[6]);
+    list1->append(_teams[8]);
+    list2->append(_teams[3]);
+    list1->append(_teams[0]);
+    list2->append(_teams[4]);
+    list1->append(_teams[9]);
+    list2->append(_teams[10]);
+    list1->append(_teams[7]);
+    list2->append(_teams[5]);
+    list1->append(_teams[1]);
+    list2->append(_teams[11]);
+    generateGames(day, dayList, (list1), (list2));
+    printSchedule(QString("Game ")+QString::number(day), *dayList);
+
+    day = 5;
+    list1->clear();
+    list2->clear();
+    dayList->clear();
+
+    list1->append(_teams[6]);
+    list2->append(_teams[9]);
+    list1->append(_teams[11]);
+    list2->append(_teams[8]);
+    list1->append(_teams[5]);
+    list2->append(_teams[0]);
+    list1->append(_teams[4]);
+    list2->append(_teams[7]);
+    list1->append(_teams[1]);
+    list2->append(_teams[10]);
+    list1->append(_teams[3]);
+    list2->append(_teams[2]);
+    generateGames(day, dayList, (list1), (list2));
+    printSchedule(QString("Game ")+QString::number(day), *dayList);
+
+    day = 6;
+    list1->clear();
+    list2->clear();
+    dayList->clear();
+    list1->append(_teams[11]);
+    list2->append(_teams[4]);
+    list1->append(_teams[0]);
+    list2->append(_teams[9]);
+    list1->append(_teams[6]);
+    list2->append(_teams[10]);
+    list1->append(_teams[3]);
+    list2->append(_teams[7]);
+    list1->append(_teams[5]);
+    list2->append(_teams[2]);
+    list1->append(_teams[1]);
+    list2->append(_teams[8]);
+    generateGames(day, dayList, (list1), (list2));
+    printSchedule(QString("Game ")+QString::number(day), *dayList);
+
+    day = 7;
+    list1->clear();
+    list2->clear();
+    dayList->clear();
+    list1->append(_teams[9]);
+    list2->append(_teams[4]);
+    list1->append(_teams[5]);
+    list2->append(_teams[1]);
+    list1->append(_teams[2]);
+    list2->append(_teams[10]);
+    list1->append(_teams[8]);
+    list2->append(_teams[7]);
+    list1->append(_teams[6]);
+    list2->append(_teams[3]);
+    list1->append(_teams[0]);
+    list2->append(_teams[11]);
+    generateGames(day, dayList, (list1), (list2));
+    printSchedule(QString("Game ")+QString::number(day), *dayList);
+
+    day = 8;
+    list1->clear();
+    list2->clear();
+    dayList->clear();
+    list1->append(_teams[10]);
+    list2->append(_teams[7]);
+    list1->append(_teams[9]);
+    list2->append(_teams[11]);
+    list1->append(_teams[0]);
+    list2->append(_teams[8]);
+    list1->append(_teams[6]);
+    list2->append(_teams[5]);
+    list1->append(_teams[2]);
+    list2->append(_teams[1]);
+    list1->append(_teams[4]);
+    list2->append(_teams[3]);
+
+    generateGames(day, dayList, (list1), (list2));
+    printSchedule(QString("Game ")+QString::number(day), *dayList);
+
+    day = 9;
+    list1->clear();
+    list2->clear();
+    dayList->clear();
+
+    list1->append(_teams[0]);
+    list2->append(_teams[10]);
+    list1->append(_teams[8]);
+    list2->append(_teams[9]);
+    list1->append(_teams[11]);
+    list2->append(_teams[7]);
+    list1->append(_teams[1]);
+    list2->append(_teams[6]);
+    list1->append(_teams[5]);
+    list2->append(_teams[3]);
+    list1->append(_teams[4]);
+    list2->append(_teams[2]);
+
+    generateGames(day, dayList, (list1), (list2));
+    printSchedule(QString("Game ")+QString::number(day), *dayList);
+
+    day = 10;
+    list1->clear();
+    list2->clear();
+    dayList->clear();
+
+    list1->append(_teams[7]);
+    list2->append(_teams[9]);
+    list1->append(_teams[10]);
+    list2->append(_teams[8]);
+    list1->append(_teams[11]);
+    list2->append(_teams[6]);
+    list1->append(_teams[4]);
+    list2->append(_teams[5]);
+    list1->append(_teams[3]);
+    list2->append(_teams[1]);
+    list1->append(_teams[2]);
+    list2->append(_teams[0]);
     generateGames(day, dayList, (list1), (list2));
     printSchedule(QString("Game ")+QString::number(day), *dayList);
 

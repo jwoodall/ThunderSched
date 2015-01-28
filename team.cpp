@@ -2,8 +2,8 @@
 #include <QString>
 
 QStringList team::Races = QStringList()<< "Amazon"<<"Chaos"<<"ChaosDwarf"<<"ChaosPact"<<"DarkElf"<<"Dwarf"<<"Elf"<<"Goblin"<<"Halfling"<<"HighElf"<<"Human"<<"Khemri"<<"Lizardmen"<<"Necromantic"<<"Norse"<<"Nurgle"<<"Ogre"<<"Orc"<<"Skaven"<<"Slann"<<"Undead"<<"Underworld"<<"Vampire"<<"WoodElf";
-QString team::_team_url = "http://thunderbowl.ca/tbsn/index.php?section=objhandler&type=1&obj=2&obj_id=";
-QString team::_coach_url = "http://thunderbowl.ca/tbsn/index.php?section=objhandler&type=1&obj=3&obj_id=";
+QString team::_team_url = "http://tbsn.thunderbowl.ca/index.php?section=objhandler&type=1&obj=2&obj_id=";
+QString team::_coach_url = "http://tbsn.thunderbowl.ca/index.php?section=objhandler&type=1&obj=3&obj_id=";
 
 team::team()
 {

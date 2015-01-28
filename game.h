@@ -13,6 +13,7 @@ public:
 
     game(team* home, team* away, int day);
 	~game(void);
+    void swap();
     void print(QFile &file);
     void validate(){_valid = _home!=_away;}
     QString dayString(){return QString::number(_day);}

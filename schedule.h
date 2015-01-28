@@ -6,6 +6,7 @@
 class schedule
 {
 private:
+    QString _filename;
 	int _num_games;
 	int _max_teams;
     QList<team*> _teams;
@@ -20,10 +21,11 @@ private:
                          };
 
 public:
-	schedule(int num_games);
+    schedule(QString filename, int num_games);
 	~schedule(void);
 	int generate();
     int generate18for10();
+    int generate12for10();
     int addTeam(team* team1);
     int numberTeams(){return _teams.count();}
     int generateGames(int day, QList<game*>* dayGames, const QList<team*>* home, const QList<team*>* away );
@@ -33,7 +35,10 @@ public:
     void shiftAltScheduleLeft( QList<team*>* home );
     void printSchedule( QString header, QList<game*> daySched );
     bool validateSchedule();
+    bool validateGames();
     int getGameCount(team* team1);
+    int getAwayGameCount(team* team1);
+    int getHomeGameCount(team* team1);
     int getBashGameCount(team* team1);
     int getFinesseGameCount(team* team1);
     bool verifyTeam(team* team1);

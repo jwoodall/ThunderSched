@@ -16,6 +16,13 @@ game::~game(void)
 {
 }
 
+void game::swap()
+{
+    team* temp = _home;
+    _home = _away;
+    _away = temp;
+}
+
 void game::print(QFile &file)
 {
     QTextStream out(&file);
