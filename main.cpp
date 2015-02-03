@@ -12,7 +12,7 @@
 #include "schedule.h"
 #include "sql_queries.h"
 
-
+// Season18 10 "D://project//thunder_noui//18_b//"
 int main(int argc, char *argv[])
 {
 	QCoreApplication a(argc, argv);
@@ -29,6 +29,38 @@ int main(int argc, char *argv[])
     out << "ThunderSchedule version 0.1" << endl;
 
     QStringList arguments = a.arguments();
+
+    if (arguments.count() == 2){
+        // this section reads an html file and extracts all the teams
+        QFile file(QString(arguments.at(1)));
+        if (!file.open(QIODevice::ReadOnly)) {
+           //("Unable to open file %s, aborting\n", file.fileName().toStdString().c_str());
+           return 1;
+        }
+        if (!file.isReadable()) {
+            //("Unable to read file %s, aborting\n", file.fileName().toStdString().c_str());
+            return false;
+        }
+        QTextStream in(&file);
+        while (!in.atEnd()) {
+            QString line = in.readLine();
+            QRegularExpression team_html(".*<td><a\\shref='index\\.php\\?section=objhandler\\&amp;type=1\\&amp;obj=2\\&amp;obj_id=(\\d+)'>([\\w-']+)</a></td><td><a\\shref='index\\.php\\?section=objhandler\\&amp;type=1\\&amp;obj=3\\&amp;obj_id=(\\d+)'>([\\w-']+)</a></td>.*<td><a\\shref='index\\.php\\?section=objhandler\\&amp;type=1\\&amp;obj=4\\&amp;obj_id=(\\d+)'>([\\w-']+)</a></td>.*$");
+            QRegularExpressionMatch match = team_html.match(line);
+            if(match.hasMatch()){
+                QString team_id = match.captured(1);
+                QString name = match.captured(2);
+                QString coach_id = match.captured(3);
+                QString coach = match.captured(4);
+                QString race = match.captured(6);
+                int race_id = getMyTeam(race);
+                team* add_team = new team( race_id
+                                        , name
+                                        , coach
+                                        , coach_id
+                                        , team_id );
+            }
+        }
+    }
 
     if (arguments.count() < 4){
         return 1;

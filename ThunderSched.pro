@@ -25,4 +25,5 @@ SOURCES += main.cpp \
            team.cpp \
            schedule.cpp \
            game.cpp \
-           coach.cpp
+           coach.cpp \
+    parsehtml.cpp
