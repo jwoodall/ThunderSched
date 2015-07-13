@@ -26,11 +26,17 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    out << "ThunderSchedule version 0.1" << endl;
+    out << "ThunderSchedule version 0.3" << endl;
+    // v0.1 inital design with hand coded teams
+    // v0.2 accepts files, and arguments in the form of [season] [games] [league name]
+    // v0.3 creates schedule from an html dump fron the obblm database
+    //      -- go to team standings, change tournament to be the selected one, right click save as website, html only
+    //      -- pass that file name as the first argument, second argument is number of games
+
 
     QStringList arguments = a.arguments();
 
-    if (arguments.count() == 2){
+    if (arguments.count() == 3){
         // this section reads an html file and extracts all the teams
         QFile file(QString(arguments.at(1)));
         if (!file.open(QIODevice::ReadOnly)) {
@@ -43,7 +49,7 @@ int main(int argc, char *argv[])
         }
 
         // B-League Schedule
-        int games = 10;
+        int games = arguments.at(2).toInt();
 //        QString baseFileName = "D://project//thunder_noui//output//season19//1//";
 //      QString filename = baseFileName + "thundersched_19_B.txt";
         QString filename = arguments.at(1) + ".out";
