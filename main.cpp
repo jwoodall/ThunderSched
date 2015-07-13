@@ -44,15 +44,17 @@ int main(int argc, char *argv[])
 
         // B-League Schedule
         int games = 10;
-        QString baseFileName = "D://project//thunder_noui//output//season19//1//";
-        QString filename = baseFileName + "thundersched_19_B.txt";
-        schedule newSched_B(filename, games);
-        newSched_B = schedule(filename, games);
+//        QString baseFileName = "D://project//thunder_noui//output//season19//1//";
+//      QString filename = baseFileName + "thundersched_19_B.txt";
+        QString filename = arguments.at(1) + ".out";
+        schedule newSched(filename, games);
+        newSched = schedule(filename, games);
 
         QTextStream in(&file);
         while (!in.atEnd()) {
             QString line = in.readLine();
-            QRegularExpression team_html(".*<td><a\\shref='index\\.php\\?section=objhandler\\&amp;type=1\\&amp;obj=2\\&amp;obj_id=(\\d+)'>([\\w-']+)</a></td><td><a\\shref='index\\.php\\?section=objhandler\\&amp;type=1\\&amp;obj=3\\&amp;obj_id=(\\d+)'>([\\w-']+)</a></td>.*<td><a\\shref='index\\.php\\?section=objhandler\\&amp;type=1\\&amp;obj=4\\&amp;obj_id=(\\d+)'>([\\w-']+)</a></td>.*$");
+//            QRegularExpression team_html(".*<td><a\\shref='index\\.php\\?section=objhandler\\&amp;type=1\\&amp;obj=2\\&amp;obj_id=(\\d+)'>([\\w-'\\s]+)</a></td><td><a\\shref='index\\.php\\?section=objhandler\\&amp;type=1\\&amp;obj=\\d\\&amp;obj_id=(\\d+)'>([\\w-'\\s]+)</a></td>.*<td><a\\shref='index\\.php\\?section=objhandler\\&amp;type=1\\&amp;obj=\\d\\&amp;obj_id=(\\d+)'>([\\w-'\\s]+)</a></td>.*$");
+            QRegularExpression team_html(".*<td><a\\shref='index\\.php\\?section=objhandler\\&amp;type=1\\&amp;obj=2\\&amp;obj_id=(\\d+)'>([\\x20-\\xFF]+)</a></td><td><a\\shref='index\\.php\\?section=objhandler\\&amp;type=1\\&amp;obj=\\d\\&amp;obj_id=(\\d+)'>([\\x20-\\xFF]+)</a></td>.*<td><a\\shref='index\\.php\\?section=objhandler\\&amp;type=1\\&amp;obj=\\d\\&amp;obj_id=(\\d+)'>([\\x20-\\xFF]+)</a></td>.*$");
             QRegularExpressionMatch match = team_html.match(line);
             if(match.hasMatch()){
                 QString team_id = match.captured(1);
@@ -66,15 +68,15 @@ int main(int argc, char *argv[])
                                         , coach
                                         , coach_id
                                         , team_id );
-                newSched_B.addTeam( add_team );
+                newSched.addTeam( add_team );
             }
         }
-        int num_teams_b = newSched_B.numberTeams();
+        int num_teams = newSched.numberTeams();
 
         out << QString("*************") << endl;
-        out << QString("Schedule for ")+QString::number(games)+" games, "+QString::number(num_teams_b)+" teams."  << endl;
+        out << QString("Schedule for ")+QString::number(games)+" games, "+QString::number(num_teams)+" teams."  << endl;
 
-        newSched_B.generate();
+        newSched.generate();
     }
 
     if (arguments.count() < 4){
