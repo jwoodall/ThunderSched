@@ -41,6 +41,14 @@ int main(int argc, char *argv[])
             //("Unable to read file %s, aborting\n", file.fileName().toStdString().c_str());
             return false;
         }
+
+        // B-League Schedule
+        int games = 10;
+        QString baseFileName = "D://project//thunder_noui//output//season19//1//";
+        QString filename = baseFileName + "thundersched_19_B.txt";
+        schedule newSched_B(filename, games);
+        newSched_B = schedule(filename, games);
+
         QTextStream in(&file);
         while (!in.atEnd()) {
             QString line = in.readLine();
@@ -58,9 +66,17 @@ int main(int argc, char *argv[])
                                         , coach
                                         , coach_id
                                         , team_id );
+                newSched_B.addTeam( add_team );
             }
         }
+        int num_teams_b = newSched_B.numberTeams();
+
+        out << QString("*************") << endl;
+        out << QString("Schedule for ")+QString::number(games)+" games, "+QString::number(num_teams_b)+" teams."  << endl;
+
+        newSched_B.generate();
     }
+
 
     if (arguments.count() < 4){
         return 1;
