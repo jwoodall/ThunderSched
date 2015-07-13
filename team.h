@@ -91,10 +91,9 @@ public:
          return QString(_team_url)+_team_id;
      };
      QString coach_url() {
-         return QString(_coach_url)+_coach_id+"&subsec=profile";
+         return QString(_coach_url)+_coach_id;
      };
 
      static QStringList Races;
-     static team getTeamFromHtml(const QString &string);
 };
 

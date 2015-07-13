@@ -57,8 +57,3 @@ bool team::operator==( const team& rhs )
 	if (_name != rhs._name) return false;
 	return true;
 }
-
-team team::getTeamFromHtml(const QString &html) {
-    team new_team;
-    return new_team;
-}

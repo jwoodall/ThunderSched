@@ -1,0 +1,17 @@
+=files_html=
+html parsing, team html file in:
+  D:\project\thunder_noui\files\teams.1
+  
+1 command line argument:
+  D:\project\thunder_noui\files\teams.1
+  
+=files=
+Command line arguments:
+  18 10 B
+  season, games, league
+Teams need to go in:
+D:\project\thunder_noui\files\[league]teams.txt
+race, name, user, user id, team id
+ChaosDwarf,Phlegraean Marauders,Gollumullog,50,281
+
+  

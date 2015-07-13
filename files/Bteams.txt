@@ -1,0 +1,18 @@
+ChaosDwarf,Phlegraean Marauders,Gollumullog,50,281
+Slann,Freezin Reign,Nevyn,56,400
+Chaos,Freaks and Weirdos,Spaceman Spiff,14,18
+WoodElf,Druid's Dream,Gazgul,30,314
+Orc,Waauugghh Mash'een ,Dah Koach,99,378
+Human,Silly English Kannniggits,poundfist,6,425
+ChaosDwarf,40 Grinders,Blammaham,53,113
+HighElf,Chrace White-Lions,Keggiemckill,10,423
+Slann,Leaps of Faith,Warpstone,22,324
+ChaosDwarf,Darkland Warriors,Dylanator,19,46
+ChaosPact,Powers of Pain,Badcuz,112,408
+WoodElf,Monarch's' Minions,UrukHai,97,364
+Chaos,Warlords,Sallacious,15,19
+HighElf,Eataine Excelsiors,endycarus,47,71
+Norse,Ravers Re-Booted,dva13,71,228
+Chaos,Need to Feed,Redman,21,419
+Human,Verde Slackers,Smallpox,104,359
+Orc,Rangoon Typhoon,MacPhee,51,435
