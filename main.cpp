@@ -36,8 +36,9 @@ int main(int argc, char *argv[])
 
     // import teams
     int games = arguments.at(2).toInt();
-    QString in_file = arguments.at(3)+"teams.txt";
-    QString out_file = arguments.at(3)+ arguments.at(1) + ".txt";
+    QString file_base = "D:\\project\\thunder_noui\\files\\";
+    QString in_file = file_base+arguments.at(3)+"teams.txt";
+    QString out_file = file_base+arguments.at(3)+ arguments.at(1) + ".txt";
 
     schedule newSched(out_file, games);
     int num_teams = 0;
