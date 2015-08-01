@@ -1,6 +1,7 @@
 #include <QTextStream>
 #include <QSet>
 #include <QFile>
+#include <QDir>
 #include "schedule.h"
 
 schedule::schedule(QString filename, int num_games)
@@ -229,6 +230,9 @@ bool schedule::validateSchedule()
     out << "  Count teams" << endl;
     foreach(team* tm, _teams){
         int count = getGameCount(tm);
+        int bash = 0;
+        int finesse = 0;
+        int non = getStyleGameCount(tm, &bash, &finesse);
         int count_bash = getBashGameCount(tm);
         int count_finesse = getFinesseGameCount(tm);
 
@@ -250,6 +254,9 @@ bool schedule::validateSchedule()
     out << endl;
 
     // Generate Day Lists
+    //delete the file before beginning
+    QDir dir(_filename);
+    dir.remove(_filename);
     for(int day=1; day<=_num_games;++day){
         QList<game*>* dayList = new QList<game*>();
 
@@ -298,6 +305,33 @@ int schedule::getHomeGameCount(team* team1)
         if (gm->home() == team1) count++;
     }
     return count;
+}
+
+
+int schedule::getStyleGameCount(team* team1, int* bash, int* finesse)
+{
+    int count = 0;
+    int non = 0;
+    foreach(game* gm, _games){
+        if (gm->away() == team1){
+            int race = gm->home()->race();
+            if (_bash.contains(race)) *bash++;
+            else if (_finesse.contains(race)) *finesse++;
+            else {
+                non++; }
+        }
+        else if (gm->home() == team1){
+            int race = gm->away()->race();
+            if (_bash.contains(race)) *bash++;
+            else if (_finesse.contains(race)) *finesse++;
+            else {
+                non++; }
+        }
+        else {
+            non++;
+        }
+    }
+    return non;
 }
 
 int schedule::getBashGameCount(team* team1)

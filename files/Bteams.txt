@@ -1,18 +1,16 @@
-ChaosDwarf,Phlegraean Marauders,Gollumullog,50,281
-Slann,Freezin Reign,Nevyn,56,400
-Chaos,Freaks and Weirdos,Spaceman Spiff,14,18
-WoodElf,Druid's Dream,Gazgul,30,314
-Orc,Waauugghh Mash'een ,Dah Koach,99,378
-Human,Silly English Kannniggits,poundfist,6,425
-ChaosDwarf,40 Grinders,Blammaham,53,113
-HighElf,Chrace White-Lions,Keggiemckill,10,423
-Slann,Leaps of Faith,Warpstone,22,324
-ChaosDwarf,Darkland Warriors,Dylanator,19,46
-ChaosPact,Powers of Pain,Badcuz,112,408
-WoodElf,Monarch's' Minions,UrukHai,97,364
-Chaos,Warlords,Sallacious,15,19
-HighElf,Eataine Excelsiors,endycarus,47,71
-Norse,Ravers Re-Booted,dva13,71,228
-Chaos,Need to Feed,Redman,21,419
-Human,Verde Slackers,Smallpox,104,359
-Orc,Rangoon Typhoon,MacPhee,51,435
+Ork, Rage Quittaz, Ocrumsprug, 74, 450
+Khemri, Old Kingdom Pharaohs, Gimli, 31, 386
+WoodElf, Disposable Heroes, Spaceman Spiff, 14, 309
+Lizardmen, Disco Science, Bubbles, 9, 131
+Humans, DM Electric, Dylanator, 19, 392
+Orcs, Kamz Krusherz, Mr.Bloodweiser, 91, 206
+Undead, Thresher, Acheron, 98, 357
+Chaos, Need to Feed, Redman, 21, 419
+Halfling, Nuffles Gonna Stand In Our Way, Keggimckill, 10, 308
+Lizardman, Gator boys , Sallacious, 15, 424
+Skaven, Eshin's 11, Nevyn, 56, 285
+ChaosDwarf, Hades Crook'd Raiders, Mr Gordon, 62, 306
+ChaosPact, Powers of Pain, BadCuz, 112, 408
+Human, Silly English Kanniggits, poundfist, 6, 425
+DarkElf, Brotherhood of Mutants, Rimmer, 7, 451
+Vampires, Cruor Madidus, Trentusdementus, 77,  170

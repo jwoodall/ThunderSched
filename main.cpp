@@ -69,6 +69,7 @@ int main(int argc, char *argv[])
                 QString coach = match.captured(4);
                 QString race = match.captured(6);
                 int race_id = getMyTeam(race);
+                if (race_id < 0) { out << QString("Race not found:") << race << " for " << name << endl; }
                 team* add_team = new team( race_id
                                         , name
                                         , coach
@@ -104,7 +105,7 @@ int main(int argc, char *argv[])
         while (!in.atEnd()){
             QString line = in.readLine();
             QRegExp comment_RexExp("^\\s*//.*");
-            QRegExp team_RexExp("^\\s*([\\w]+),(.*),(.*),(\\d+),(\\d+)\\s*$");
+            QRegExp team_RexExp("^\\s*([\\w]+)\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)\\s*$");
             if (comment_RexExp.exactMatch(line)){ continue;}
             if (team_RexExp.exactMatch(line)){
                 QStringList team_values = team_RexExp.capturedTexts();
@@ -113,6 +114,8 @@ int main(int argc, char *argv[])
                                         , team_values.at(3)
                                         , team_values.at(4)
                                         , team_values.at(5) );
+                if (getMyTeam(team_values.at(1)) < 0) { out << QString("Race not found:") << team_values.at(1) << " for " << team_values.at(2) << endl; }
+
                 newSched.addTeam( add_team );
             }
         }

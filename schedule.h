@@ -41,6 +41,7 @@ public:
     int getHomeGameCount(team* team1);
     int getBashGameCount(team* team1);
     int getFinesseGameCount(team* team1);
+    int getStyleGameCount(team* team1, int* bash, int* finesse);
     bool verifyTeam(team* team1);
 };
 

@@ -31,30 +31,31 @@ enum myTeams {
 };
 
 static int getMyTeam(QString team){
-    if (team == "Amazon") return Amazon;
+    if (team.startsWith("Amaz",Qt::CaseInsensitive)) return Amazon;
     if (team == "Chaos") return Chaos;
-    if (team == "ChaosDwarf") return ChaosDwarf;
-    if (team == "ChaosPact") return ChaosPact;
-    if (team == "DarkElf") return DarkElf;
-    if (team == "Dwarf") return Dwarf;
-    if (team == "Elf") return Elf;
-    if (team == "Goblin") return Goblin;
-    if (team == "Halfling") return Halfling;
-    if (team == "HighElf") return HighElf;
-    if (team == "Human") return Human;
-    if (team == "Khemri") return Khemri;
-    if (team == "Lizardmen") return Lizardmen;
-    if (team == "Necromantic") return Necromantic;
-    if (team == "Norse") return Norse;
-    if (team == "Nurgle") return Nurgle;
-    if (team == "Ogre") return Ogre;
-    if (team == "Orc") return Orc;
-    if (team == "Skaven") return Skaven;
-    if (team == "Slann") return Slann;
-    if (team == "Undead") return Undead;
-    if (team == "Underworld") return Underworld;
-    if (team == "Vampire") return Vampire;
-    if (team == "WoodElf") return WoodElf;
+    if (team.startsWith( "ChaosDwar",Qt::CaseInsensitive)) return ChaosDwarf;
+    if (team.startsWith( "ChaosPact",Qt::CaseInsensitive)) return ChaosPact;
+    if (team.startsWith( "DarkEl",Qt::CaseInsensitive)) return DarkElf;
+    if (team.startsWith( "Dwar",Qt::CaseInsensitive)) return Dwarf;
+    if (team.startsWith( "El",Qt::CaseInsensitive)) return Elf;
+    if (team.startsWith( "Goblin",Qt::CaseInsensitive)) return Goblin;
+    if (team.startsWith( "Halfling",Qt::CaseInsensitive)) return Halfling;
+    if (team.startsWith( "HighEl",Qt::CaseInsensitive)) return HighElf;
+    if (team.startsWith( "Human",Qt::CaseInsensitive)) return Human;
+    if (team.startsWith( "Khemri",Qt::CaseInsensitive)) return Khemri;
+    if (team.startsWith( "Lizardm",Qt::CaseInsensitive)) return Lizardmen;
+    if (team.startsWith( "Necro",Qt::CaseInsensitive)) return Necromantic;
+    if (team.startsWith( "Norse",Qt::CaseInsensitive)) return Norse;
+    if (team.startsWith( "Nurgle",Qt::CaseInsensitive)) return Nurgle;
+    if (team.startsWith( "Ogre",Qt::CaseInsensitive)) return Ogre;
+    if (team.startsWith( "Orc",Qt::CaseInsensitive)) return Orc;
+    if (team.startsWith( "Ork",Qt::CaseInsensitive)) return Orc;
+    if (team.startsWith( "Skaven",Qt::CaseInsensitive)) return Skaven;
+    if (team.startsWith( "Slann",Qt::CaseInsensitive)) return Slann;
+    if (team.startsWith( "Undead",Qt::CaseInsensitive)) return Undead;
+    if (team.startsWith( "Underworld",Qt::CaseInsensitive)) return Underworld;
+    if (team.startsWith( "Vampire",Qt::CaseInsensitive)) return Vampire;
+    if (team.startsWith( "WoodEl",Qt::CaseInsensitive)) return WoodElf;
     return -1;
 }
 
