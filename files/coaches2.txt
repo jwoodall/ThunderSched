@@ -1,0 +1,316 @@
+
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+    <html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <title>Thunderbowl Sports Network</title>
+        <link type="text/css" href="css/stylesheet1.css" rel="stylesheet">
+        <link rel="alternate" type="application/rss+xml" title="RSS Feed"href="rss.xml">
+        <script type="text/javascript" src="lib/misc_functions.js"></script>
+        <script type="text/javascript" src="lib/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="lib/jquery.autocomplete-min.js"></script>
+        <script type="text/javascript" src="lib/jquery.expander.js"></script>
+        <link type="text/css" href="css/autocomplete.css" rel="stylesheet">
+
+        <!-- CSS MENU (./cssmenu extension) -->
+        <link href="cssmenu/css/dropdown/dropdown.css" media="all" rel="stylesheet" type="text/css">
+        <link href="cssmenu/css/dropdown/themes/default/default.ultimate.css" media="all" rel="stylesheet" type="text/css">
+        <!-- <script type="text/javascript" src="cssmenu/js/jquery/jquery.js"></script> -->
+        <script type="text/javascript" src="cssmenu/js/jquery/jquery.dropdown.js"></script>
+        <!--[if lt IE 7]>
+        <script type="text/javascript" src="cssmenu/js/jquery/jquery.js"></script>
+        <script type="text/javascript" src="cssmenu/js/jquery/jquery.dropdown.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="everything">
+            <div class="banner"></div>
+            <div class="menu">
+                    <ul id="nav" class="dropdown dropdown-horizontal">
+        <li><a href="index.php?section=login">Login</a></li>        <li><a href="index.php?section=main">Home</a></li>
+        <li><a href="index.php?section=teamlist">Teams</a></li>
+        <li><a href="index.php?section=coachlist">Coaches</a></li>
+        <li><span class="dir">Matches</span>
+            <ul>
+                <li><a href="index.php?section=matches&amp;type=tours">Tournaments</a></li>
+                <li><a href="index.php?section=matches&amp;type=recent">Recent matches</a></li>
+                <li><a href="index.php?section=matches&amp;type=upcoming">Upcoming matches</a></li>
+                <li><a href="index.php?section=matches&amp;type=usersched">Schedule match</a></li>
+            </ul>
+        </li>
+        <li><span class="dir">Statistics</span>
+            <ul>
+                <li><a href="index.php?section=objhandler&amp;type=2&amp;obj=2">Team standings</a></li>
+                <li><a href="index.php?section=objhandler&amp;type=2&amp;obj=1">Player standings</a></li>
+                <li><a href="index.php?section=objhandler&amp;type=2&amp;obj=3">Coach standings</a></li>
+                <li><a href="index.php?section=objhandler&amp;type=2&amp;obj=4">Race standings</a></li>
+                <li><a href="index.php?section=objhandler&amp;type=2&amp;obj=5">Star standings</a></li>
+            </ul>
+        </li>
+        <li><span class="dir">Plugins</span>
+            <ul>
+                <li><a href="handler.php?type=search">Find coach or team</a></li>                <li><a href="handler.php?type=teamcompare">Team strength compare</a></li>                <li><a href="handler.php?type=hof">Hall of fame</a></li>                <li><a href="handler.php?type=famousteams">Famous Teams</a></li>                <li><a href="handler.php?type=wanted">Wanted</a></li>                <li><a href="handler.php?type=prize">Prizes</a></li>                <li><a href="handler.php?type=cemetery&amp;tid=0">Cemetery</a></li>                <li><a href="handler.php?type=memmatches">Memorable matches</a></li>                <li><a href="handler.php?type=graph&amp;gtype=4&amp;id=none">Graphical statistics</a></li>                <li><a href="handler.php?type=gallery">Gallery</a></li>				                				            </ul>
+        </li>
+
+        <li><a href="index.php?section=rules">Rules</a></li>
+        <li><a href="index.php?section=about">OBBLM</a></li>
+        <li><a href="http://thunderbowl.ca/forum">Thunderbowl Forum</a></li>    </ul>
+                </div> <!-- Menu div end -->
+            <div class="section"> <!-- This container holds the section specific content -->
+    
+<!-- Header loaded, login auth, html frame generated: 0.0631628036499 -->
+<h2>Coaches</h2>
+    <form method="POST">
+    Display from    <select  name="node" onChange="
+        selConst = Number(this.options[this.selectedIndex].value);
+        disableall();
+        switch(selConst)
+        {
+            case 12: document.getElementById('tour_in').style.display = 'inline'; break;
+            case 13:   document.getElementById('division_in').style.display = 'inline'; break;
+            case 14:     document.getElementById('league_in').style.display = 'inline'; break;
+        }
+    ">
+        <option value='14' SELECTED>League</option>
+<option value='13' >Division</option>
+<option value='12' >Tournament</option>
+    </select>
+    :<select name='tour_in' id='tour_in' style="display:none;">
+<optgroup class='leagues' label='Thunderbowl'>
+<optgroup class='divisions' style='padding-left: 1em;' label='Exhibition Series '>
+<option  style='background-color: white; margin-left: -1em;' value='118' >Exhibition Series 17</option>
+<option  style='background-color: white; margin-left: -1em;' value='109' >Exhibition Season 16</option>
+<option  style='background-color: white; margin-left: -1em;' value='105' >Exhibition Season 15</option>
+<option  style='background-color: white; margin-left: -1em;' value='99' >Exhibition Season 15</option>
+<option  style='background-color: white; margin-left: -1em;' value='83' >Exhibition Season 13</option>
+</optgroup>
+<optgroup class='divisions' style='padding-left: 1em;' label='Thunderbowl Minor League'>
+<option  style='background-color: white; margin-left: -1em;' value='117' >Minor League Season 17</option>
+<option  style='background-color: white; margin-left: -1em;' value='108' >Minor League Season 16</option>
+<option  style='background-color: white; margin-left: -1em;' value='97' >Minor League Season 15</option>
+<option  style='background-color: white; margin-left: -1em;' value='90' >Minor League Season 14</option>
+<option  style='background-color: white; margin-left: -1em;' value='80' >Minor League Season 13</option>
+<option  style='background-color: white; margin-left: -1em;' value='74' >Minor League Season 12</option>
+<option  style='background-color: white; margin-left: -1em;' value='67' >Minor League Season 11</option>
+</optgroup>
+<optgroup class='divisions' style='padding-left: 1em;' label='Challenge Rounds'>
+<option  style='background-color: white; margin-left: -1em;' value='123' >Challenge Season 17</option>
+<option  style='background-color: white; margin-left: -1em;' value='110' >Challenge Season 16</option>
+<option  style='background-color: white; margin-left: -1em;' value='100' >Challenge Season 15</option>
+<option  style='background-color: white; margin-left: -1em;' value='91' >Challenge Season 14</option>
+<option  style='background-color: white; margin-left: -1em;' value='86' >Challenge Season 13</option>
+<option  style='background-color: white; margin-left: -1em;' value='79' >Challenge Season 12</option>
+<option  style='background-color: white; margin-left: -1em;' value='72' >Challenge Season 11</option>
+<option  style='background-color: white; margin-left: -1em;' value='65' >Challenge Season 10</option>
+<option  style='background-color: white; margin-left: -1em;' value='55' >Challenge Season 9</option>
+<option  style='background-color: white; margin-left: -1em;' value='49' >Challenge Season 8</option>
+<option  style='background-color: white; margin-left: -1em;' value='43' >Challenge Season 7</option>
+</optgroup>
+<optgroup class='divisions' style='padding-left: 1em;' label='B/C League '>
+<option  style='background-color: white; margin-left: -1em;' value='114' >Firebowl Playoffs Season 16</option>
+<option  style='background-color: white; margin-left: -1em;' value='111' >Underbowl Playoffs Season 16</option>
+<option  style='background-color: white; margin-left: -1em;' value='104' >Firebowl Playoffs Season 15</option>
+<option  style='background-color: white; margin-left: -1em;' value='103' >Underbowl Playoffs Season 15</option>
+<option  style='background-color: white; margin-left: -1em;' value='95' >Underbowl Playoffs Season 14</option>
+<option  style='background-color: white; margin-left: -1em;' value='94' >Firebowl Playoffs Season 14</option>
+<option  style='background-color: white; margin-left: -1em;' value='87' >Underbowl Playoffs Season 13</option>
+<option  style='background-color: white; margin-left: -1em;' value='78' >Underbowl Playoffs Season 12</option>
+<option  style='background-color: white; margin-left: -1em;' value='71' >Underbowl Playoffs Season 11</option>
+<option  style='background-color: white; margin-left: -1em;' value='64' >Underbowl Playoffs Season 10</option>
+<option  style='background-color: white; margin-left: -1em;' value='57' >Underbowl Playoffs Season 9</option>
+<option  style='background-color: white; margin-left: -1em;' value='48' >Underbowl Playoffs Season 8</option>
+<option  style='background-color: white; margin-left: -1em;' value='42' >Underbowl Playoffs Season 7</option>
+<option  style='background-color: white; margin-left: -1em;' value='13' >Underbowl Playoffs Season 2</option>
+<option  style='background-color: white; margin-left: -1em;' value='12' >Thunderbowl Playoffs Season 2</option>
+<option  style='background-color: white; margin-left: -1em;' value='9' >B/C League Season 2</option>
+<option  style='background-color: white; margin-left: -1em;' value='8' >Thunderbowl Final Season 1</option>
+<option  style='background-color: white; margin-left: -1em;' value='7' >Powerbowl Final Season 1</option>
+<option  style='background-color: white; margin-left: -1em;' value='6' >Shallya Cup Final Season 1</option>
+<option  style='background-color: white; margin-left: -1em;' value='5' >Ranold Cup Final Season 1</option>
+<option  style='background-color: white; margin-left: -1em;' value='4' >Underbowl Final Season 1</option>
+<option  style='background-color: white; margin-left: -1em;' value='3' >B/C League Season 1</option>
+</optgroup>
+<optgroup class='divisions' style='padding-left: 1em;' label='C League'>
+<option  style='background-color: white; margin-left: -1em;' value='121' >Underbowl 17</option>
+<option  style='background-color: white; margin-left: -1em;' value='120' >C League Playoffs Season 17</option>
+<option  style='background-color: white; margin-left: -1em;' value='115' >C League Season 17</option>
+<option  style='background-color: white; margin-left: -1em;' value='113' >Powerbowl Playoffs Season 16</option>
+<option  style='background-color: white; margin-left: -1em;' value='106' >C League Season 16</option>
+<option  style='background-color: white; margin-left: -1em;' value='102' >Powerbowl Playoffs Season 15</option>
+<option  style='background-color: white; margin-left: -1em;' value='98' >C League Season 15</option>
+<option  style='background-color: white; margin-left: -1em;' value='93' >Powerbowl Playoffs Season 14</option>
+<option  style='background-color: white; margin-left: -1em;' value='89' >C League Season 14</option>
+<option  style='background-color: white; margin-left: -1em;' value='85' >Powerbowl Playoffs Season 13</option>
+<option  style='background-color: white; margin-left: -1em;' value='82' >C League Season 13</option>
+<option  style='background-color: white; margin-left: -1em;' value='77' >Powerbowl Playoffs Season 12</option>
+<option  style='background-color: white; margin-left: -1em;' value='75' >C League Season 12</option>
+<option  style='background-color: white; margin-left: -1em;' value='70' >Powerbowl Playoffs Season 11</option>
+<option  style='background-color: white; margin-left: -1em;' value='68' >C League Season 11</option>
+<option  style='background-color: white; margin-left: -1em;' value='62' > Powerbowl Playoffs Season 10</option>
+<option  style='background-color: white; margin-left: -1em;' value='60' >C League Season 10</option>
+<option  style='background-color: white; margin-left: -1em;' value='53' >Powerbowl Playoffs Season 9</option>
+<option  style='background-color: white; margin-left: -1em;' value='50' >C League Season 9</option>
+<option  style='background-color: white; margin-left: -1em;' value='46' >Powerbowl Playoffs Season 8</option>
+<option  style='background-color: white; margin-left: -1em;' value='45' >C League Season 8</option>
+<option  style='background-color: white; margin-left: -1em;' value='41' >Powerbowl Playoffs Season 7</option>
+<option  style='background-color: white; margin-left: -1em;' value='38' >C League Season 7</option>
+<option  style='background-color: white; margin-left: -1em;' value='36' >Underbowl Finals Season 6</option>
+<option  style='background-color: white; margin-left: -1em;' value='35' >C League Playoffs Season 6</option>
+<option  style='background-color: white; margin-left: -1em;' value='34' >C League Season 6</option>
+<option  style='background-color: white; margin-left: -1em;' value='30' >Underbowl Final Season 5</option>
+<option  style='background-color: white; margin-left: -1em;' value='28' >C League Playoffs Season 5</option>
+<option  style='background-color: white; margin-left: -1em;' value='27' >C League Season 5</option>
+<option  style='background-color: white; margin-left: -1em;' value='24' >Underbowl Playoffs Season 4</option>
+<option  style='background-color: white; margin-left: -1em;' value='22' >C League Playoffs Season 4</option>
+<option  style='background-color: white; margin-left: -1em;' value='21' >C League Season 4</option>
+<option  style='background-color: white; margin-left: -1em;' value='17' >C League Playoffs Season 3</option>
+<option  style='background-color: white; margin-left: -1em;' value='16' >C League Season 3</option>
+</optgroup>
+<optgroup class='divisions' style='padding-left: 1em;' label='B League'>
+<option  style='background-color: white; margin-left: -1em;' value='122' >Firebowl 17</option>
+<option  style='background-color: white; margin-left: -1em;' value='119' >Thunderbowl Playoffs Season 17</option>
+<option  style='background-color: white; margin-left: -1em;' value='116' >B League Season 17</option>
+<option  style='background-color: white; margin-left: -1em;' value='112' >Thunderbowl Playoffs Season 16</option>
+<option  style='background-color: white; margin-left: -1em;' value='107' >B League Season 16</option>
+<option  style='background-color: white; margin-left: -1em;' value='101' >Thunderbowl Playoffs Season 15</option>
+<option  style='background-color: white; margin-left: -1em;' value='96' >B League Season 15</option>
+<option  style='background-color: white; margin-left: -1em;' value='92' >Thunderbowl Playoffs Season 14</option>
+<option  style='background-color: white; margin-left: -1em;' value='88' >B League Season 14</option>
+<option  style='background-color: white; margin-left: -1em;' value='84' >Thunderbowl Playoffs Season 13</option>
+<option  style='background-color: white; margin-left: -1em;' value='81' >B League Season 13</option>
+<option  style='background-color: white; margin-left: -1em;' value='76' >Thunderbowl Playoffs Season 12</option>
+<option  style='background-color: white; margin-left: -1em;' value='73' >B League Season 12</option>
+<option  style='background-color: white; margin-left: -1em;' value='69' >Thunderbowl Playoffs Season 11 </option>
+<option  style='background-color: white; margin-left: -1em;' value='66' >B League Season 11</option>
+<option  style='background-color: white; margin-left: -1em;' value='63' >Thunderbowl Playoffs Season 10</option>
+<option  style='background-color: white; margin-left: -1em;' value='61' >B League Season 10</option>
+<option  style='background-color: white; margin-left: -1em;' value='52' >Thunderbowl Playoffs Season 9</option>
+<option  style='background-color: white; margin-left: -1em;' value='51' >B League Season 9</option>
+<option  style='background-color: white; margin-left: -1em;' value='47' >Thunderbowl Playofffs Season 8</option>
+<option  style='background-color: white; margin-left: -1em;' value='44' >B League Season 8</option>
+<option  style='background-color: white; margin-left: -1em;' value='40' >Thunderbowl Playoffs Season 7</option>
+<option  style='background-color: white; margin-left: -1em;' value='39' >B League Season 7</option>
+<option  style='background-color: white; margin-left: -1em;' value='33' >Thunderbowl Final Season 6</option>
+<option  style='background-color: white; margin-left: -1em;' value='32' >B League Playoffs Season 6</option>
+<option  style='background-color: white; margin-left: -1em;' value='31' >B League Season 6</option>
+<option  style='background-color: white; margin-left: -1em;' value='29' >Thunderbowl Final Season 5</option>
+<option  style='background-color: white; margin-left: -1em;' value='26' >B League Playoffs Season 5</option>
+<option  style='background-color: white; margin-left: -1em;' value='25' >B League Season 5</option>
+<option  style='background-color: white; margin-left: -1em;' value='23' >Thunderbowl Final Season 4</option>
+<option  style='background-color: white; margin-left: -1em;' value='20' >B League Playoffs Season 4</option>
+<option  style='background-color: white; margin-left: -1em;' value='19' >B League Season 4</option>
+<option  style='background-color: white; margin-left: -1em;' value='18' >Thunderbowl Final Season 3</option>
+<option  style='background-color: white; margin-left: -1em;' value='15' >B League Playoffs Season 3</option>
+<option  style='background-color: white; margin-left: -1em;' value='14' >B League Season 3</option>
+</optgroup>
+</optgroup>
+</select>
+<select name='division_in' id='division_in' style="display:none;">
+<optgroup class='leagues' label='Thunderbowl'>
+<option  style='background-color: white;' value='10' >Exhibition Series </option>
+<option  style='background-color: white;' value='9' >Thunderbowl Minor League</option>
+<option  style='background-color: white;' value='7' >Challenge Rounds</option>
+<option  style='background-color: white;' value='4' >B/C League </option>
+<option  style='background-color: white;' value='2' >C League</option>
+<option  style='background-color: white;' value='1' >B League</option>
+</optgroup>
+</select>
+<select name='league_in' id='league_in' style="display:none;">
+<option style='font-weight: bold;' value='-1'>-All-</option>
+<option  value='1' SELECTED>Thunderbowl</option>
+</select>
+Type        <select name="state_in" id="state_in">
+            <option value='1' SELECTED>All-time</option>
+<option value='2'  >Active</option>
+        </select>
+            &nbsp;
+    <input type="hidden" name="ANS" value="1">
+    <input type="submit" name="select" value="Select">
+    </form>
+    <script language="JavaScript" type="text/javascript">
+        var open;
+        
+            switch(14)
+            {
+                case 12: open = "tour"; break;
+                case 13:   open = "division"; break;
+                case 14:     open = "league"; break;
+            }
+        document.getElementById(open+'_in').style.display = 'inline'
+        function disableall()
+        {
+            document.getElementById('tour_in').style.display = 'none';
+            document.getElementById('division_in').style.display = 'none';
+            document.getElementById('league_in').style.display = 'none';
+            return true;
+        }
+    </script>
+    <br><center><table><tr><td>Page: <a href='?section=coachlist&amp;page=1'>1</a>, 2</td></td><tr><td>Coaches: 98</td></td></table></center><br>    <table class="common" >
+        <tr class="commonhead">
+            <td colspan="3"><b>
+            Coaches&nbsp;
+                        </b></td>
+        </tr>
+        <tr>
+            <td><i>Name</i></td><td><i>Teams</i></td><td><i>Retired</i></td>        </tr>
+        <tr>
+        <td></td><td></td><td></td>        </tr>
+        <tr><td colspan="3"><hr></td></tr>
+        <tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=78'>Killerbean</a></td><td>2</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=106'>Kodeack</a></td><td>4</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=28'>Krythis</a></td><td>1</td><td><b>Yes</b></td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=13'>Lord Chaos</a></td><td>7</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=83'>Lowecore</a></td><td>3</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=27'>Luvverman</a></td><td>3</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=51'>MacPhee</a></td><td>7</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=92'>Majyk</a></td><td>6</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=62'>Mr Gordon</a></td><td>8</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=91'>Mr.Bloodweiser</a></td><td>5</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=11'>Nathan</a></td><td>2</td><td><b>Yes</b></td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=64'>NeonKnight</a></td><td>7</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=56'>Nevyn</a></td><td>4</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=52'>NitNit</a></td><td>5</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=87'>Number6</a></td><td>2</td><td><b>Yes</b></td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=74'>Ocrumsprug</a></td><td>4</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=39'>Orangefiend</a></td><td>2</td><td><b>Yes</b></td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=23'>Osirus11</a></td><td>2</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=68'>Pao78</a></td><td>0</td><td><b>Yes</b></td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=55'>Pixelgeek</a></td><td>1</td><td><b>Yes</b></td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=110'>polluxx66</a></td><td>0</td><td><b>Yes</b></td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=6'>Poundfist</a></td><td>8</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=37'>Punkpogoer</a></td><td>1</td><td><b>Yes</b></td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=114'>pythrr</a></td><td>1</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=49'>Ragginbone</a></td><td>2</td><td><b>Yes</b></td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=100'>Rat Salat</a></td><td>1</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=80'>reccerat</a></td><td>1</td><td><b>Yes</b></td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=21'>Redman</a></td><td>6</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=35'>Redshirt</a></td><td>1</td><td><b>Yes</b></td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=7'>Rimmer</a></td><td>10</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=25'>Rude Slay</a></td><td>7</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=15'>Sallacious</a></td><td>7</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=59'>ShiroK</a></td><td>3</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=113'>sideswipe626</a></td><td>0</td><td><b>Yes</b></td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=54'>Sike</a></td><td>1</td><td><b>Yes</b></td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=104'>Smallpox</a></td><td>2</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=26'>Smedwoman</a></td><td>3</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=14'>Spaceman Spiff</a></td><td>5</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=103'>Squirrel</a></td><td>3</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=46'>Subhedgehog</a></td><td>2</td><td><b>Yes</b></td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=77'>Trentusdementus</a></td><td>7</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=97'>UrukHai</a></td><td>4</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=93'>Vampire Logan</a></td><td>9</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=95'>Vareek</a></td><td>1</td><td><b>Yes</b></td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=16'>Wallyfish</a></td><td>1</td><td><b>Yes</b></td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=22'>Warpstone</a></td><td>6</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=18'>Wedge22</a></td><td>9</td><td>No</td></tr>
+<tr><td><a href='index.php?section=objhandler&amp;type=1&amp;obj=3&amp;obj_id=88'>Xophe</a></td><td>1</td><td><b>Yes</b></td></tr>
+</table>
+                <!-- Pseudo container to force parent container to have the correct height for (potential) floating children -->
+                <div style="clear: both;"></div>
+            </div> <!-- End of section div -->
+        </div> <!-- End of everything div -->
+    </body>
+    </html>
+    
+<!-- END OF SCRIPT: 0.0778958797455 -->
