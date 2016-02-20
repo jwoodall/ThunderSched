@@ -26,6 +26,7 @@ public:
 	int generate();
     int generate18for10();
     int generate12for10();
+    int generate5for6();
     int addTeam(team* team1);
     int numberTeams(){return _teams.count();}
     int generateGames(int day, QList<game*>* dayGames, const QList<team*>* home, const QList<team*>* away );
